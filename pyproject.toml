@@ -1,0 +1,21 @@
+[build-system]
+requires = ["hatchling==1.27.0"]
+build-backend = "hatchling.build"
+
+[project]
+name = "novera"
+version = "0.1.0"
+description = "Fundacao da plataforma de pesquisa de investimentos Novera"
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+dependencies = []
+
+[dependency-groups]
+dev = ["pytest>=8.3,<9"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["backend/src/novera"]
+
+[tool.pytest.ini_options]
+testpaths = ["backend/tests"]
+addopts = "--import-mode=importlib"

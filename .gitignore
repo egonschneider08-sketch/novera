@@ -1,0 +1,38 @@
+# Python and local tools
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+build/
+dist/
+*.egg-info/
+# Frontend
+node_modules/
+# Secrets and local configuration
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+credentials*.json
+secrets*.json
+# Local datasets, caches and analytical databases
+/data/
+/cache/
+/artifacts/
+*.parquet
+*.duckdb
+*.duckdb.wal
+*.sqlite
+*.sqlite3
+.ipynb_checkpoints/
+# Editors and OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
