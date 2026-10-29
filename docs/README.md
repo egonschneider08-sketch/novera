@@ -14,3 +14,5 @@ conforme o protocolo. Evidencias de aceitacao ficam nos PRs do GitHub.
 - [Heuristicas puras](strategies.md): interfaces e exemplo sintetico NV-002.
 
 - [Cliente HTTP seguro](http-client.md): GET, cache por acesso, freshness e limites.
+
+- [Adaptador brapi v2](brapi-adapter.md): cotacao de um ativo, metadados e limites oficiais.
