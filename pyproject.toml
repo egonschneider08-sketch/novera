@@ -11,7 +11,12 @@ requires-python = ">=3.12,<3.13"
 dependencies = []
 
 [dependency-groups]
-dev = ["pytest>=8.3,<9"]
+dev = [
+    "detect-secrets==1.5.0",
+    "pip-audit==2.9.0",
+    "pytest>=9.0.3,<10",
+    "ruff==0.14.2",
+]
 
 [tool.hatch.build.targets.wheel]
 packages = ["backend/src/novera"]
@@ -19,3 +24,10 @@ packages = ["backend/src/novera"]
 [tool.pytest.ini_options]
 testpaths = ["backend/tests"]
 addopts = "--import-mode=importlib"
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F", "I"]

@@ -16,11 +16,11 @@ release do produto nem validacao para uso em producao.
 ## Clone e ambiente
 
 Em PowerShell, Linux ou macOS, partindo de um diretorio pai onde
-`novera-nv001-review` ainda nao exista, para revisar este PR:
+`novera-ci-review` ainda nao exista, para revisar a pilha ate NV-012 (PRs #7, #8, #9 e #10):
 
 ```sh
-git clone --branch feature/NV-001-monorepo-foundation https://github.com/egonschneider08-sketch/novera.git novera-nv001-review
-cd novera-nv001-review
+git clone --branch feature/NV-012-ci-security https://github.com/egonschneider08-sketch/novera.git novera-ci-review
+cd novera-ci-review
 uv sync --locked --group dev
 uv run --locked python -c "import novera; print(novera.__name__)"
 uv run --locked pytest -q
@@ -48,8 +48,8 @@ DNS por outras funcoes, extensoes nativas, processos externos ou outros meios
 de I/O de rede. Nao constitui isolamento de rede do sistema operacional nem
 garantia universal de ausencia de I/O. `uv --offline` impede acesso de rede
 pelo uv, nao pelo codigo executado. Testes financeiros e mocks de fornecedores
-pertencem as proximas issues. Lint, tipagem e CI ainda nao estao
-configurados; serao tratados em NV-003/NV-012.
+pertencem as proximas issues. Lint, formato e CI inicial estao na branch dependente NV-012; tipagem estatica
+nao esta configurada. Veja [CI e seguranca](docs/ci-security.md).
 
 ## Estrutura
 

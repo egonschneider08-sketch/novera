@@ -6,18 +6,25 @@ from decimal import Decimal
 from unittest.mock import Mock
 
 import pytest
-
 from novera.contracts import Asset, Observation, Period, Provenance, Quality, RecordKind, Source
 
 
 def record(quality=Quality.PRESENT, value=Decimal("0"), reason=None):
     return Observation(
-        Asset("synthetic", "test-asset"), RecordKind.INDICATOR, "test_ratio",
-        value, quality, "ratio", None,
-        Provenance(Source("test", "fixture:integrity", "1", True),
-                   Period(date(2025, 1, 1), date(2025, 12, 31)),
-                   datetime(2026, 1, 2, tzinfo=timezone.utc),
-                   datetime(2026, 1, 1, tzinfo=timezone.utc)), reason,
+        Asset("synthetic", "test-asset"),
+        RecordKind.INDICATOR,
+        "test_ratio",
+        value,
+        quality,
+        "ratio",
+        None,
+        Provenance(
+            Source("test", "fixture:integrity", "1", True),
+            Period(date(2025, 1, 1), date(2025, 12, 31)),
+            datetime(2026, 1, 2, tzinfo=timezone.utc),
+            datetime(2026, 1, 1, tzinfo=timezone.utc),
+        ),
+        reason,
     )
 
 
@@ -53,8 +60,9 @@ def test_immutable_record_and_nested_provenance():
 def test_equivalent_offsets_compare_as_instants():
     provenance = record().provenance
     local_time = datetime(2026, 1, 1, 21, tzinfo=timezone(timedelta(hours=-3)))
-    result = replace(provenance, collected_at=local_time,
-                     published_at=datetime(2026, 1, 2, tzinfo=timezone.utc))
+    result = replace(
+        provenance, collected_at=local_time, published_at=datetime(2026, 1, 2, tzinfo=timezone.utc)
+    )
     assert result.published_at == result.collected_at
     with pytest.raises(ValueError):
         replace(result, published_at=result.published_at + timedelta(microseconds=1))
@@ -62,8 +70,9 @@ def test_equivalent_offsets_compare_as_instants():
 
 def test_unknown_publication_preserves_collection_without_inventing_as_of_date():
     item = record()
-    provenance = replace(item.provenance, published_at=None,
-                         publication_unknown_reason="not supplied")
+    provenance = replace(
+        item.provenance, published_at=None, publication_unknown_reason="not supplied"
+    )
     assert provenance.collected_at == item.provenance.collected_at
     assert provenance.published_at is None
 
@@ -71,6 +80,10 @@ def test_unknown_publication_preserves_collection_without_inventing_as_of_date()
 def test_distinct_assets_and_revisions_remain_distinct():
     original = record()
     renamed = replace(original, asset=Asset("synthetic", "other-asset"))
-    revised = replace(original, provenance=replace(original.provenance,
-                       source=replace(original.provenance.source, rule_version="2")))
+    revised = replace(
+        original,
+        provenance=replace(
+            original.provenance, source=replace(original.provenance.source, rule_version="2")
+        ),
+    )
     assert len({original, renamed, revised}) == 3

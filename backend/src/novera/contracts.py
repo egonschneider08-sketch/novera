@@ -1,10 +1,10 @@
 """Validated in-memory financial observations; no provider or wire-format adapter."""
 
+import re
 from dataclasses import dataclass
 from datetime import date, datetime
 from decimal import Decimal
 from enum import StrEnum
-import re
 
 
 class Quality(StrEnum):
@@ -140,8 +140,14 @@ class Observation:
             if self.value is not None:
                 raise ValueError("non-present value must be None")
             _text(self.reason, "reason")
-        for field in ("statement_scope", "statement_basis", "revision", "distribution_type",
-                      "tax_basis", "adjustment"):
+        for field in (
+            "statement_scope",
+            "statement_basis",
+            "revision",
+            "distribution_type",
+            "tax_basis",
+            "adjustment",
+        ):
             if getattr(self, field) is not None:
                 _text(getattr(self, field), field)
         for field in ("ex_date", "payment_date"):
@@ -171,7 +177,12 @@ class Observation:
                 raise ValueError("instant statement must reference a single date")
         elif any(v is not None for v in statement_fields):
             raise ValueError("statement metadata is specific to statements")
-        distribution_fields = (self.distribution_type, self.tax_basis, self.ex_date, self.payment_date)
+        distribution_fields = (
+            self.distribution_type,
+            self.tax_basis,
+            self.ex_date,
+            self.payment_date,
+        )
         if self.kind is RecordKind.DISTRIBUTION:
             _text(self.currency, "currency")
             _text(self.distribution_type, "distribution_type")
