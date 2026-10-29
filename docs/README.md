@@ -6,3 +6,5 @@
 
 Decisoes significativas futuras devem usar `docs/adr/ADR-XXXX-short-title.md`
 conforme o protocolo. Evidencias de aceitacao ficam nos PRs do GitHub.
+
+- [Contratos financeiros](financial-contracts.md): estados e proveniencia (NV-004).

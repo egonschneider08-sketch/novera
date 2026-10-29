@@ -33,7 +33,7 @@ reutilizadas do cache global do uv; isto nao simula uma maquina sem cache.
 
 `uv sync` cria `.venv`, instala o pacote local em modo editavel e usa as versoes
 registradas em `uv.lock`. Nao e necessario ativar o ambiente. O resultado
-esperado do import e `novera`; a suite inicial deve reportar `1 passed`.
+esperado do import e `novera`; a suite deve passar; a contagem cresce com os contratos da NV-004.
 Depois do sync, os testes podem rodar sem rede:
 
 ```sh
@@ -81,3 +81,5 @@ existir, PRs iniciais de fundacao usam `main`. Merge exige aceite humano.
 NV-001 estabelece apenas a estrutura. NV-004 define contratos e proveniencia;
 NV-002 extrai o codigo de referencia; NV-003 amplia ambiente e testes;
 NV-012 implementa CI e verificacoes de seguranca.
+
+Contratos internos e limitacoes: [NV-004](docs/financial-contracts.md).
