@@ -747,3 +747,26 @@ def test_import_module_has_no_socket_network(tmp_path):
         check=True,
     )
     assert result.stdout.strip() == "ok"
+
+
+def test_auth_invalidation_partition_is_independent_of_header_order():
+    def handler(request):
+        return (
+            httpx.Response(403)
+            if request.url.path == "/forbidden"
+            else httpx.Response(200, json={"value": 1})
+        )
+
+    client, _ = build(handler)
+    first = {"Authorization": "Bearer synthetic-one", "X-API-Key": "synthetic-two"}
+    reordered = dict(reversed(list(first.items())))
+    get(client, "/good", headers=first)
+    with pytest.raises(FetchError):
+        get(client, "/forbidden", headers=reordered)
+    assert get(client, "/good", headers=first).freshness is Freshness.NETWORK
+
+
+def test_proxy_authorization_cannot_be_sent_to_origin():
+    client, _ = build(lambda r: pytest.fail("must not transmit proxy credential"))
+    with pytest.raises(ValueError):
+        get(client, headers={"Proxy-Authorization": "Bearer synthetic-proxy"})

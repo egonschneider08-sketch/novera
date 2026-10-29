@@ -164,3 +164,9 @@ O controle negativo com marcador sintetico de chave continua obrigatorio.
 As verificacoes posteriores foram executadas com fail-fast antes do commit.
 Nenhum token, senha de servico ou credencial real foi identificado nesses achados.
 A CI inicial e as reexecucoes devem ser relatadas separadamente no PR.
+
+
+A revisao final adicionou regressao para ordenacao de headers: a particao de
+invalidacao de autorizacao usa headers de credencial canonizados, para que
+401/403 eliminem o mesmo namespace mesmo com ordem de campos diferente.
+Proxy-Authorization e rejeitado para nao encaminhar credencial de proxy a origem.

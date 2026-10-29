@@ -182,7 +182,7 @@ def _cache_ttl(headers: httpx.Headers) -> float | None:
 
 def _credential_values(headers: httpx.Headers) -> tuple[str, ...]:
     values = []
-    for name, value in headers.multi_items():
+    for name, value in sorted(headers.multi_items()):
         normalized = name.replace("-", "").replace("_", "").casefold()
         if any(
             word in normalized
@@ -397,7 +397,13 @@ class SecureHttpClient:
             request_headers.update(headers or {})
             if any(
                 name in request_headers
-                for name in ("cookie", "host", "content-length", "transfer-encoding")
+                for name in (
+                    "cookie",
+                    "host",
+                    "content-length",
+                    "transfer-encoding",
+                    "proxy-authorization",
+                )
             ):
                 raise ValueError("cookies and routing headers unsupported")
             if any("\r" in value or "\n" in value for value in request_headers.values()):
