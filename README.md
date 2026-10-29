@@ -3,6 +3,8 @@
 Plataforma de pesquisa de investimentos em fase de fundacao (Sprint 0).
 O estado atual oferece um pacote Python instalavel e um teste de importacao;
 nao fornece cotacoes, API, interface ou algoritmos financeiros validados.
+A versao `0.1.0` identifica somente o pacote inicial; nao representa uma
+release do produto nem validacao para uso em producao.
 
 ## Requisitos
 
@@ -13,21 +15,21 @@ nao fornece cotacoes, API, interface ou algoritmos financeiros validados.
 
 ## Clone e ambiente
 
-Em PowerShell, Linux ou macOS, partindo do diretorio pai:
+Em PowerShell, Linux ou macOS, partindo de um diretorio pai onde
+`novera-nv001-review` ainda nao exista, para revisar este PR:
 
 ```sh
-git clone https://github.com/egonschneider08-sketch/novera.git
-cd novera
+git clone --branch feature/NV-001-monorepo-foundation https://github.com/egonschneider08-sketch/novera.git novera-nv001-review
+cd novera-nv001-review
 uv sync --locked --group dev
 uv run --locked python -c "import novera; print(novera.__name__)"
 uv run --locked pytest -q
 ```
 
-Enquanto o PR da NV-001 estiver em revisao, depois de clonar e antes do sync:
-
-```sh
-git switch --track origin/feature/NV-001-monorepo-foundation
-```
+Apos o merge, para preparar a versao integrada, use `--branch main` no clone
+acima. O destino explicito cria um checkout separado, sem reutilizar `.venv`
+ou arquivos nao versionados do checkout de trabalho. Dependencias podem ser
+reutilizadas do cache global do uv; isto nao simula uma maquina sem cache.
 
 `uv sync` cria `.venv`, instala o pacote local em modo editavel e usa as versoes
 registradas em `uv.lock`. Nao e necessario ativar o ambiente. O resultado
@@ -39,8 +41,14 @@ uv run --offline --locked pytest -q
 ```
 
 A suite atual verifica apenas a fundacao: importacao do pacote instalado fora
-do checkout, com acesso por socket bloqueado. Testes financeiros e mocks de
-fornecedores pertencem as proximas issues. Lint, tipagem e CI ainda nao estao
+do checkout, em modo Python isolado (`-I`). No subprocesso, o teste substitui
+`socket.socket` antes de importar `novera`, detectando tentativas de criar
+sockets por essa chamada Python. Isso e uma verificacao parcial: nao bloqueia
+DNS por outras funcoes, extensoes nativas, processos externos ou outros meios
+de I/O de rede. Nao constitui isolamento de rede do sistema operacional nem
+garantia universal de ausencia de I/O. `uv --offline` impede acesso de rede
+pelo uv, nao pelo codigo executado. Testes financeiros e mocks de fornecedores
+pertencem as proximas issues. Lint, tipagem e CI ainda nao estao
 configurados; serao tratados em NV-003/NV-012.
 
 ## Estrutura

@@ -4,7 +4,11 @@ import subprocess
 import sys
 
 
-def test_installed_package_imports_offline(tmp_path):
+def test_installed_package_import_with_socket_constructor_guard(tmp_path):
+    """Guard Python socket creation only, not DNS, native I/O or subprocesses.
+
+    This is an import smoke test, not an OS-level network isolation guarantee.
+    """
     result = subprocess.run(
         [
             sys.executable,
