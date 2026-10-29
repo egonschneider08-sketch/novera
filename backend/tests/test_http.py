@@ -723,9 +723,22 @@ def test_auth_failure_invalidates_other_resources_in_same_partition_only():
     assert get(client, "/good").freshness is Freshness.NETWORK
 
 
-def test_vary_star_prevents_storage():
-    client, _ = build(lambda r: httpx.Response(200, json={"value": 1}, headers={"Vary": "*"}))
-    get(client)
+@pytest.mark.parametrize("vary", ["*", " *", "Accept-Language, *"])
+def test_vary_star_prevents_storage(vary):
+    calls = []
+
+    def handler(request):
+        calls.append(request)
+        return httpx.Response(200, json={"value": len(calls)}, headers={"Vary": vary})
+
+    client, _ = build(handler)
+    first = get(client)
+    second = get(client)
+    assert len(calls) == 2
+    assert first.freshness is Freshness.NETWORK
+    assert second.freshness is Freshness.NETWORK
+    assert first.data == {"value": 1}
+    assert second.data == {"value": 2}
     assert not client._cache._entries
 
 

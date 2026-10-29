@@ -56,7 +56,12 @@ relogio monotonic. Limite por entradas, nao quota de bytes agregada.
 
 TTL default 60s. ttl=0 nao gera hit fresco. A politica atual nao pode estender
 o TTL original de uma entrada. max-age/Age do servidor podem encurta-lo.
-no-store/no-cache/must-revalidate e Vary:* impedem armazenamento. Nao e um
+no-store/no-cache/must-revalidate e Vary:* impedem armazenamento. Os valores
+de Vary sao separados por virgula e comparados apos remover espacos externos;
+um token * impede armazenamento mesmo acompanhado de outros valores.
+Testes de regressao para `Vary: *`, `Vary:  *` e `Vary: Accept-Language, *`
+verificam duas chamadas ao transporte mockado, ambas NETWORK, sem reutilizacao.
+Nao e um
 cache HTTP RFC completo: sem ETag, revalidacao condicional ou Expires. Adapters
 devem respeitar termos/licencas e verificar se o recurso pode ser cacheado.
 

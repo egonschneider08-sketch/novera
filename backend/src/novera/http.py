@@ -159,7 +159,7 @@ class _Outcome(Generic[T]):
 
 
 def _cache_ttl(headers: httpx.Headers) -> float | None:
-    if "*" in headers.get("Vary", "").split(","):
+    if any(part.strip() == "*" for part in headers.get("Vary", "").split(",")):
         return None
     directives = [part.strip().lower() for part in headers.get("Cache-Control", "").split(",")]
     if any(
