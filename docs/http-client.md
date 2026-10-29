@@ -47,7 +47,7 @@ instancias/processos, nem inferencia de limite de plano comercial.
 MemoryCache e limitado (padrao 256 entradas, LRU), somente em memoria. A chave e
 HMAC-SHA256 com segredo aleatorio por cache, nao URL/token em texto ou hash simples.
 Identidade inclui provedor, origem/requisicao normalizada, tenant, entitlement,
-revisao da credencial, schema e todos os headers, inclusive credenciais e Vary.
+revisao da credencial, schema e todos os headers, inclusive material de autenticacao e headers de variacao.
 Credenciais novas separam entradas mesmo se o contexto declarado nao mudou.
 So o valor validado e copiado; request, headers, cookies e resposta bruta nao
 sao armazenados. Retornos sao copias defensivas. Cache compartilhado entre
@@ -151,3 +151,16 @@ Auditoria inclui dependencias do lock; acesso a indice/advisories exige rede.
 Proximos incrementos: adapters brapi/BCB em PRs separados, contratos e proveniencia,
 cache distribuido somente com requisitos/benchmark, pipeline depois de adapters.
 Sem nova coleta, banco, UI, deploy ou copia literal do Winning Investments v2.
+
+
+## Ocorrencia na publicacao inicial
+
+O scanner identificou duas fixtures deliberadamente sinteticas (URL .invalid
+com user:password e parametro api_key com valor synthetic). A sequencia local
+nao interrompeu o shell no exit nao zero do scanner e publicou o primeiro commit.
+Corrigido com anotacoes allowlist estritamente nas duas linhas de fixtures,
+justificadas no proprio teste, sem desabilitar plugins ou reduzir a varredura.
+O controle negativo com marcador sintetico de chave continua obrigatorio.
+As verificacoes posteriores foram executadas com fail-fast antes do commit.
+Nenhum token, senha de servico ou credencial real foi identificado nesses achados.
+A CI inicial e as reexecucoes devem ser relatadas separadamente no PR.

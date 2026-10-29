@@ -406,7 +406,7 @@ def test_hmac_key_does_not_contain_or_equal_unkeyed_secret_hash():
     "origin",
     [
         "http://provider.invalid",
-        "https://user:password@provider.invalid",
+        "https://user:password@provider.invalid",  # pragma: allowlist secret -- synthetic invalid origin
         "https://provider.invalid/path",
         "https://provider.invalid?token=x",
     ],
@@ -419,7 +419,9 @@ def test_origin_rejects_credentials_insecure_scheme_or_dynamic_path(origin):
 @pytest.mark.parametrize(
     "kwargs",
     [
-        {"params": {"api_key": "synthetic"}},
+        {
+            "params": {"api_key": "synthetic"}  # pragma: allowlist secret -- synthetic fixture
+        },
         {"headers": {"Cookie": "session=synthetic"}},
         {"headers": {"Host": "other.invalid"}},
     ],
