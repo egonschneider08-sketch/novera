@@ -1,8 +1,9 @@
 # Novera
 
 Plataforma de pesquisa de investimentos em fase de fundacao (Sprint 0).
-O estado atual oferece um pacote Python instalavel e um teste de importacao;
-nao fornece cotacoes, API, interface ou algoritmos financeiros validados.
+O estado atual oferece contratos financeiros e heuristicas puras Bazin/Graham
+com testes sinteticos. Nao fornece cotacoes, API, interface, recomendacoes ou
+metodologias financeiras completas/validadas com dados reais.
 A versao `0.1.0` identifica somente o pacote inicial; nao representa uma
 release do produto nem validacao para uso em producao.
 
@@ -16,18 +17,18 @@ release do produto nem validacao para uso em producao.
 ## Clone e ambiente
 
 Em PowerShell, Linux ou macOS, partindo de um diretorio pai onde
-`novera-ci-review` ainda nao exista, para revisar a pilha ate NV-012 (PRs #7, #8, #9 e #10):
+`novera` ainda nao exista:
 
 ```sh
-git clone --branch feature/NV-012-ci-security https://github.com/egonschneider08-sketch/novera.git novera-ci-review
-cd novera-ci-review
+git clone --branch main https://github.com/egonschneider08-sketch/novera.git novera
+cd novera
 uv sync --locked --group dev
 uv run --locked python -c "import novera; print(novera.__name__)"
 uv run --locked pytest -q
 ```
 
-Apos o merge, para preparar a versao integrada, use `--branch main` no clone
-acima. O destino explicito cria um checkout separado, sem reutilizar `.venv`
+Para revisar a NV-002 antes do merge, use
+`--branch feature/NV-002-winning-investments-migration` no clone acima. O destino explicito cria um checkout separado, sem reutilizar `.venv`
 ou arquivos nao versionados do checkout de trabalho. Dependencias podem ser
 reutilizadas do cache global do uv; isto nao simula uma maquina sem cache.
 
@@ -40,15 +41,15 @@ Depois do sync, os testes podem rodar sem rede:
 uv run --offline --locked pytest -q
 ```
 
-A suite atual verifica apenas a fundacao: importacao do pacote instalado fora
+A suite cobre contratos, heuristicas sinteticas e importacao do pacote instalado fora
 do checkout, em modo Python isolado (`-I`). No subprocesso, o teste substitui
 `socket.socket` antes de importar `novera`, detectando tentativas de criar
 sockets por essa chamada Python. Isso e uma verificacao parcial: nao bloqueia
 DNS por outras funcoes, extensoes nativas, processos externos ou outros meios
 de I/O de rede. Nao constitui isolamento de rede do sistema operacional nem
 garantia universal de ausencia de I/O. `uv --offline` impede acesso de rede
-pelo uv, nao pelo codigo executado. Testes financeiros e mocks de fornecedores
-pertencem as proximas issues. Lint, formato e CI inicial estao na branch dependente NV-012; tipagem estatica
+pelo uv, nao pelo codigo executado. Os testes nao validam provedores ou performance de investimento.
+Lint, formato e CI inicial estao integrados; tipagem estatica
 nao esta configurada. Veja [CI e seguranca](docs/ci-security.md).
 
 ## Estrutura
@@ -56,10 +57,10 @@ nao esta configurada. Veja [CI e seguranca](docs/ci-security.md).
 ```text
 backend/
   src/novera/       # pacote Python; modulos de dominio surgirao com codigo real
-  tests/           # teste basico de instalacao/importacao
+  tests/           # contratos, dominio sintetico e importacao
 frontend/          # placeholder documentado
 docs/              # engenharia e documentacao
-.github/workflows/ # placeholder; CI funcional sera implementada na NV-012
+.github/workflows/ # checks de qualidade e seguranca
 pyproject.toml     # metadados, build e dependencias
 uv.lock            # resolucao versionada das dependencias
 ```
@@ -83,3 +84,5 @@ NV-002 extrai o codigo de referencia; NV-003 amplia ambiente e testes;
 NV-012 implementa CI e verificacoes de seguranca.
 
 Contratos internos e limitacoes: [NV-004](docs/financial-contracts.md).
+
+Auditoria, formulas e limites da migracao: [Winning Investments v2](docs/migrations/winning-investments-v2.md).

@@ -8,5 +8,7 @@ Limites logicos previstos: `market_data`, `fundamentals`, `analytics`,
 codigo que justifique cada limite. Calculos de dominio nao devem ficar
 restritos a notebooks ou handlers HTTP.
 
-Esta fundacao nao oferece API, integracao de dados, banco ou regras financeiras.
-A extracao do Winning Investments v2 pertence a NV-002, alinhada a NV-004.
+O backend nao oferece API, integracao de dados, banco ou estrategia financeira
+completa. `novera.strategies` oferece somente as heuristicas puras documentadas
+na [auditoria NV-002](../docs/migrations/winning-investments-v2.md), alinhadas
+aos contratos da NV-004.
