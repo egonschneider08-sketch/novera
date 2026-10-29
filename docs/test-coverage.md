@@ -26,3 +26,14 @@ calculos, timeout, HTTP 429 ou falhas parciais. Nao foram criadas implementacoes
 ficticias nem testes que validam mocks sem exercitar codigo de producao.
 NV-003 permanece parcial e bloqueada nesses criterios. NV-012 pode iniciar a
 infraestrutura de CI sobre os testes existentes, sem declarar Sprint 0 concluida.
+
+
+## Atualizacao NV-002 (29/10/2026)
+
+O bloqueio de disponibilidade descrito acima registra o estado anterior.
+A referencia agora foi recebida e auditada com hash verificado; autoria declarada,
+mas republicacao literal ainda depende de autorizacao especifica de licenciamento.
+A NV-002 implementa independentemente heuristicas puras com testes sinteticos,
+sem copiar fonte. Veja docs/migrations/winning-investments-v2.md e docs/strategies.md.
+Testes de calculo/contratos foram ampliados; timeout, HTTP 429 e falhas parciais
+continuam pendentes do futuro cliente/adapters, depois de revisao do dominio.
