@@ -48,8 +48,8 @@ DNS por outras funcoes, extensoes nativas, processos externos ou outros meios
 de I/O de rede. Nao constitui isolamento de rede do sistema operacional nem
 garantia universal de ausencia de I/O. `uv --offline` impede acesso de rede
 pelo uv, nao pelo codigo executado. Testes financeiros e mocks de fornecedores
-pertencem as proximas issues. Lint, tipagem e CI ainda nao estao
-configurados; serao tratados em NV-003/NV-012.
+pertencem as proximas issues. Lint, formato e CI inicial estao na branch dependente NV-012; tipagem estatica
+nao esta configurada. Veja [CI e seguranca](docs/ci-security.md).
 
 ## Estrutura
 
