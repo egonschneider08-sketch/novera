@@ -16,11 +16,11 @@ release do produto nem validacao para uso em producao.
 ## Clone e ambiente
 
 Em PowerShell, Linux ou macOS, partindo de um diretorio pai onde
-`novera-nv001-review` ainda nao exista, para revisar este PR:
+`novera-ci-review` ainda nao exista, para revisar a pilha ate NV-012 (PRs #7, #8, #9 e #10):
 
 ```sh
-git clone --branch feature/NV-001-monorepo-foundation https://github.com/egonschneider08-sketch/novera.git novera-nv001-review
-cd novera-nv001-review
+git clone --branch feature/NV-012-ci-security https://github.com/egonschneider08-sketch/novera.git novera-ci-review
+cd novera-ci-review
 uv sync --locked --group dev
 uv run --locked python -c "import novera; print(novera.__name__)"
 uv run --locked pytest -q
