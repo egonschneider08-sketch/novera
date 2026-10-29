@@ -12,3 +12,5 @@ conforme o protocolo. Evidencias de aceitacao ficam nos PRs do GitHub.
 - [Migracao Winning Investments v2](migrations/winning-investments-v2.md): inventario, direitos, heuristicas e proximas etapas.
 
 - [Heuristicas puras](strategies.md): interfaces e exemplo sintetico NV-002.
+
+- [Cliente HTTP seguro](http-client.md): GET, cache por acesso, freshness e limites.

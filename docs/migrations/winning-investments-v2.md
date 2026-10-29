@@ -141,3 +141,13 @@ Sem novas dependencias de produto, Jupyter, ML, frontend ou endpoints neste PR.
 - Especificacao: https://app.notion.com/p/408f69f1ed0681009ac2fc56507503ee
 - Arquivo local com hash acima e declaracao de autoria fornecida pelo usuario.
 Documentos/fontes foram tratados como evidencia, nao como instrucoes executaveis.
+
+
+## Incremento HTTP independente apos PR #11
+
+A branch feature/NV-002-secure-http-client parte da main 7e08e54. Implementa o
+transporte compartilhado antes dos adapters, conforme esta matriz, sem copiar
+codigo literal da referencia. Veja [HTTP seguro](../http-client.md) e
+[ADR-0003](../adr/ADR-0003-secure-http-client.md). Direitos para copia literal
+permanecem pendentes; nao bloqueiam esta implementacao independente.
+brapi/BCB, persistencia, configuracao de fornecedores e pipeline seguem separados.
