@@ -37,3 +37,12 @@ A NV-002 implementa independentemente heuristicas puras com testes sinteticos,
 sem copiar fonte. Veja docs/migrations/winning-investments-v2.md e docs/strategies.md.
 Testes de calculo/contratos foram ampliados; timeout, HTTP 429 e falhas parciais
 continuam pendentes do futuro cliente/adapters, depois de revisao do dominio.
+
+
+## Incremento do cliente HTTP
+
+Testes de timeout, HTTP 429/Retry-After, transporte parcial, ritmo e cache foram
+adicionados sobre o cliente real novera.http com MockTransport, sem APIs externas.
+Isso atende essa parte da lacuna de resiliencia de NV-003; adapters de provedores,
+normalizacao e falhas parciais do futuro pipeline continuam sem implementacao.
+Veja docs/http-client.md. Nao se declara NV-002/NV-003 integralmente concluidas.
