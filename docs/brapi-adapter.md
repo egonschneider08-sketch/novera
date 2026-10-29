@@ -29,9 +29,23 @@ merge PR #12. [ADR-0004](adr/ADR-0004-brapi-quote-adapter.md).
 - [Dicionario](https://brapi.dev/docs/dicionario): null nao equivale a zero;
   ausencia nao permite inferir motivo de negocio ou NOT_APPLICABLE.
 
-O link oficial de termos https://brapi.dev/terms-of-use retornou 404 na consulta.
-Direitos de redistribuicao e uso comercial nao foram confirmados. A licenca
-declarada no OpenAPI nao deve ser interpretada como licenca de todos os dados.
+O endereco antigo https://brapi.dev/terms-of-use retornou 404. Revisao
+posterior localizou os [Termos de Uso oficiais](https://brapi.dev/legal/terms-of-use)
+(ultima atualizacao declarada pela brapi: 07/06/2025). Esses termos concedem
+licenca limitada, intransferivel e revogavel para API/dados conforme o plano,
+mas proíbem revenda, redistribuicao e sublicenciamento de dados/acesso, bem como
+servicos proxy/espelho que oferecam acesso publico concorrente.
+A [FAQ de uso comercial](https://brapi.dev/faq/posso-usar-a-brapi-para-construir-um-app-comercial-ou-para-minha-empresa)
+informa que integrar em apps comerciais e sistemas internos e possivel somente
+respeitando os termos, limites e restricoes aplicaveis as fontes. Por isso,
+a integracao de codigo do adapter com dados ficticios e autorizacao para
+desenvolver nao equivalem a licenca para redistribuir cotacoes ou disponibilizar
+um feed publico. Antes de usar dados reais no Novera, verificar plano, dados
+exibidos, armazenamento, cache, finalidade, atribuição e eventual permissao
+especifica do provedor/titulares de dados; obter esclarecimento contratual
+se houver acesso de terceiros. Nao ativar coleta publica nem exportar dados
+brapi enquanto esses requisitos nao forem aprovados. A licenca declarada no
+OpenAPI nao licencia automaticamente os dados.
 Nao houve chamada de cotacao, conta ou dicionario de dados, nem uso de token;
 somente paginas de documentacao e o schema publico foram consultados.
 Tentativas /docs/quote e /docs/rate-limits nao localizaram paginas validas;
