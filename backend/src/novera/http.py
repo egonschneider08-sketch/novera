@@ -365,6 +365,14 @@ class SecureHttpClient:
     def __enter__(self):
         return self
 
+    @property
+    def provider(self) -> str:
+        return self._provider
+
+    @property
+    def origin(self) -> str:
+        return str(self._origin)
+
     def __exit__(self, *exc):
         self.close()
 

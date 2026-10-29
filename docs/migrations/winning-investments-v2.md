@@ -151,3 +151,12 @@ codigo literal da referencia. Veja [HTTP seguro](../http-client.md) e
 [ADR-0003](../adr/ADR-0003-secure-http-client.md). Direitos para copia literal
 permanecem pendentes; nao bloqueiam esta implementacao independente.
 brapi/BCB, persistencia, configuracao de fornecedores e pipeline seguem separados.
+
+## Incremento brapi apos PR #12
+
+Primeiro recorte independente em novera.brapi: cotacao v2 de um ativo com mapeamento
+explicito para Asset e Observation, sem fallback de ticker/permissao ou inferencia
+de fundamentos. [Guia](../brapi-adapter.md) e [ADR-0004](../adr/ADR-0004-brapi-quote-adapter.md)
+registram documentacao oficial atual, divergencia da rota legada, qualidade,
+datas e limites de evidencia. Publicacao desconhecida permanece explicita.
+Sem copia literal, BCB, armazenamento ou pipeline; NV-002 continua em andamento.
