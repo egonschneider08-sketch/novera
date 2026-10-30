@@ -186,10 +186,24 @@ export const scenarioLabels: Record<ScenarioName, string> = {
   incomplete: "Dados insuficientes",
 };
 
+/** Expand Decimal scientific notation using only digit strings (never a JS financial float). */
+function plainDecimal(value: string): string {
+  const match = /^(-?)(\\d+)(?:\\.(\\d+))?[eE]([+-]?\\d+)$/.exec(value);
+  if (!match) return value;
+  const [, sign, whole, fraction = "", rawExponent] = match;
+  const exponent = Number(rawExponent);
+  if (!Number.isInteger(exponent) || Math.abs(exponent) > 60) return value;
+  const digits = whole + fraction;
+  const position = whole.length + exponent;
+  if (position <= 0) return sign + "0." + "0".repeat(-position) + digits;
+  if (position >= digits.length) return sign + digits + "0".repeat(position - digits.length);
+  return sign + digits.slice(0, position) + "." + digits.slice(position);
+}
+
 /** String manipulation only; no float parsing or financial recalculation. */
 export function displayValue(value: string | null, unit: string): string {
   if (value === null) return "Não avaliável";
-  const number = value.replace(".", ",");
+  const number = plainDecimal(value).replace(".", ",");
   if (unit === "currency/share") return `R$ ${number}`;
   return `${number} ${unit}`;
 }
