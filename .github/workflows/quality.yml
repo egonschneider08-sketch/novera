@@ -36,8 +36,6 @@ jobs:
         run: uv sync --locked --group dev
       - name: Lint
         run: uv run --offline --locked ruff check .
-      - name: Preview Ruff formatting (temporary)
-        run: uv run --offline --locked ruff format --diff backend/tests/test_demo_api.py || true
       - name: Format
         run: uv run --offline --locked ruff format --check .
       - name: Tests (no provider credentials)
