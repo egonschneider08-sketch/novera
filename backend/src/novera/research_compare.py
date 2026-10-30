@@ -160,12 +160,8 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(
         description="Compare somente casos fictícios de pesquisa do Novera."
     )
-    parser.add_argument(
-        "--scenario", action="append", choices=tuple(SCENARIOS), default=None
-    )
-    parser.add_argument(
-        "--format", choices=("text", "json", "csv"), default="text"
-    )
+    parser.add_argument("--scenario", action="append", choices=tuple(SCENARIOS), default=None)
+    parser.add_argument("--format", choices=("text", "json", "csv"), default="text")
     args = parser.parse_args(argv)
     try:
         report = compare_scenarios(args.scenario)
