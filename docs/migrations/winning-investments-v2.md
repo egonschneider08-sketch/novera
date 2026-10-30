@@ -160,3 +160,11 @@ de fundamentos. [Guia](../brapi-adapter.md) e [ADR-0004](../adr/ADR-0004-brapi-q
 registram documentacao oficial atual, divergencia da rota legada, qualidade,
 datas e limites de evidencia. Publicacao desconhecida permanece explicita.
 Sem copia literal, BCB, armazenamento ou pipeline; NV-002 continua em andamento.
+
+## Incremento BCB apos PR #13
+
+Implementacao independente de SGS 432 em novera.bcb: intervalo explicito,
+Decimal percentual -> fracao anual, data nominal e publicacao desconhecida.
+Sem inferencia de cobertura ou preenchimento de lacunas. [Guia BCB](../bcb-adapter.md)
+e [ADR-0005](../adr/ADR-0005-bcb-sgs-432.md) documentam politicas e limites.
+Preserva HTTP e contratos existentes; armazenamento/pipeline continuam separados.
