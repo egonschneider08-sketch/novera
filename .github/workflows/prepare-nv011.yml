@@ -1,9 +1,13 @@
 name: Frontend research interface quality
 
 on:
+  pull_request:
   push:
     branches:
-      - feature/NV-011-synthetic-web-ui
+      - main
+      - 'feature/**'
+      - 'fix/**'
+  workflow_dispatch:
 
 permissions:
   contents: read
