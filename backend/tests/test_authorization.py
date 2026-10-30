@@ -3,7 +3,6 @@
 from dataclasses import replace
 
 import pytest
-
 from novera.authorization import (
     POLICY_VERSION,
     AccessDenied,
