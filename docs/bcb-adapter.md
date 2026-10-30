@@ -29,11 +29,21 @@ Duas consultas pontuais de um dia fora dos testes (28/10/2026 e 02/01/2023)
 retornaram 400. Nenhum dado economico foi obtido, armazenado ou usado como fixture.
 As falhas nao identificam se a causa era do provedor, proxy ou ambiente local.
 
-O schema de resposta implementado e a projecao esperada SGS: array de objetos
-com data dd/MM/aaaa e valor decimal textual com ponto. Esta consulta nao
-revalidou esse formato por uma resposta de dados bem-sucedida. A implementacao
-esta coberta por fixtures sinteticas, nao por certificacao de integracao real.
-Confirmar o schema com uma amostra oficial bem-sucedida antes de ativar coleta.
+O schema de resposta foi validado **externamente** por leitura de um recurso
+oficial do BCB que retornou HTTP 200 em 30/10/2026:
+[SGS 432 JSON, 01/01/2023–31/12/2023](https://api.bcb.gov.br/dados/serie/bcdata.sgs.432/dados?dataFinal=31%2F12%2F2023&dataInicial=01%2F01%2F2023&formato=json).
+A resposta observada e um array JSON com objetos contendo `data` em
+dd/MM/aaaa e `valor` decimal textual com ponto (exemplo observado no inicio
+do intervalo: `{"data":"01/01/2023","valor":"13.75"}`). O link e
+exposto pelo [catalogo oficial da serie 432](https://dadosabertos.bcb.gov.br/dataset/432-taxa-de-juros---meta-selic-definida-pelo-copom).
+Esse resultado tambem confirma que a serie pode incluir fins de semana
+(a resposta contempla 01/01/2023), nao apenas dias uteis.
+As duas consultas pontuais de um dia que deram HTTP 400 permanecem sem
+diagnostico conclusivo; nao inferir que qualquer janela de um dia funcionara.
+A observacao HTTP 200 valida o formato de um recurso oficial, mas **nao**
+constitui teste ponta a ponta do BcbAdapter com rede, autorizacao de coleta
+continua ou desempenho em producao. Manter testes offline com MockTransport
+na CI e realizar verificacao operacional controlada antes de ativar o provedor.
 
 ## Interface
 
