@@ -68,17 +68,14 @@ def test_scenario_response_matches_python_contract_and_evaluations(client, scena
     ]
     assert all(item["source"]["synthetic"] is True for item in payload["observations"])
     assert all(
-        type(item["value"]) is str or item["value"] is None
-        for item in payload["observations"]
+        type(item["value"]) is str or item["value"] is None for item in payload["observations"]
     )
 
 
 def test_missing_data_is_not_zero_or_fail(client):
     response = client.get("/api/v1/demo/scenarios/incomplete")
     data = response.json()
-    missing = next(
-        item for item in data["observations"] if item["metric"] == "earnings_per_share"
-    )
+    missing = next(item for item in data["observations"] if item["metric"] == "earnings_per_share")
     assert missing["value"] is None
     assert missing["quality"] == "missing"
     assert data["strategies"][0]["state"] == "unknown"
