@@ -24,13 +24,13 @@ jobs:
           python -m pip install uv==0.11.27
           uv sync --locked --group dev
       - name: Materialize strictly synthetic finance report
-        run: uv run --offline --locked python frontend/scripts/materialize_demo.py --write
+        run: uv run --offline --locked python frontend/scripts/materialize_demo.py --check
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
       - name: Resolve pinned frontend dependencies
         working-directory: frontend
-        run: npm install --package-lock-only --ignore-scripts --no-fund --no-audit
+        run: npm ci --ignore-scripts --no-fund && npm run build && npm run test && npm audit --omit=dev --audit-level=high
       - name: Export generated UTF-8 manifest/lock in job logs for reviewed GitHub commit
         run: |
           python - <<'PY'
