@@ -1,9 +1,11 @@
 # Novera
 
-Plataforma de pesquisa de investimentos em fase de fundacao (Sprint 0).
-O estado atual oferece contratos financeiros e heuristicas puras Bazin/Graham
-com testes sinteticos. Nao fornece cotacoes, API, interface, recomendacoes ou
-metodologias financeiras completas/validadas com dados reais.
+Plataforma de pesquisa de investimentos em fase de fundacao (Sprint 0/1).
+O backend inclui contratos e heuristicas puras Bazin/Graham, cliente HTTP,
+adaptadores de brapi/BCB, armazenamento SQLite e pipeline de ingestao controlada.
+Uma primeira jornada de pesquisa **totalmente sintetica e offline** pode ser
+executada no terminal. O projeto ainda nao fornece API, frontend ou servico
+comercial com cotacoes reais, recomendacoes ou metodologias validadas em mercado.
 A versao `0.1.0` identifica somente o pacote inicial; nao representa uma
 release do produto nem validacao para uso em producao.
 
@@ -27,10 +29,9 @@ uv run --locked python -c "import novera; print(novera.__name__)"
 uv run --locked pytest -q
 ```
 
-Para revisar a NV-002 antes do merge, use
-`--branch feature/NV-002-bcb-sgs-adapter` no clone acima. O destino explicito cria um checkout separado, sem reutilizar `.venv`
-ou arquivos nao versionados do checkout de trabalho. Dependencias podem ser
-reutilizadas do cache global do uv; isto nao simula uma maquina sem cache.
+Para testar uma branch de funcionalidade antes do merge, use o nome da
+branch no clone em uma pasta separada, sem sobrescrever arquivos locais.
+Dependencias podem ser reutilizadas do cache global do uv.
 
 `uv sync` cria `.venv`, instala o pacote local em modo editavel e usa as versoes
 registradas em `uv.lock`. Nao e necessario ativar o ambiente. O resultado
@@ -51,6 +52,22 @@ garantia universal de ausencia de I/O. `uv --offline` impede acesso de rede
 pelo uv, nao pelo codigo executado. Os testes nao validam provedores ou performance de investimento.
 Lint, formato e CI inicial estao integrados; tipagem estatica
 nao esta configurada. Veja [CI e seguranca](docs/ci-security.md).
+
+## Primeira jornada de pesquisa (100% ficticia)
+
+Explore tres cenarios didaticos sem credenciais, sem arquivos persistentes
+e sem chamada de rede. O exemplo percorre contratos, armazenamento SQLite
+em memoria, consultas e calculos Graham/Bazin, mostrando evidencias e
+condicoes PASS, FAIL e UNKNOWN.
+
+```sh
+uv run --offline --locked python -m novera.research_demo --scenario complete --format text
+uv run --offline --locked python -m novera.research_demo --scenario expensive --format text
+uv run --offline --locked python -m novera.research_demo --scenario incomplete --format json
+```
+
+Este laboratorio **nao** utiliza cotacoes B3 nem pode ser interpretado como
+uma recomendacao. Detalhes: [guia da pesquisa sintetica](docs/research-demo.md).
 
 ## Estrutura
 
