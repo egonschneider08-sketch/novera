@@ -8,9 +8,10 @@ import argparse
 import json
 from pathlib import Path
 
-from novera.research_compare import compare_scenarios, comparison_json
+from novera.research_compare import compare_scenarios, comparison_csv, comparison_json
 
 TARGET = Path(__file__).resolve().parents[1] / "src" / "data" / "scenarios.json"
+CSV_TARGET = TARGET.with_name("comparison.csv")
 
 
 def render() -> str:
@@ -27,12 +28,19 @@ def main() -> int:
     mode.add_argument("--check", action="store_true")
     args = parser.parse_args()
     expected = render()
+    expected_csv = comparison_csv(compare_scenarios())
     if args.write:
         TARGET.parent.mkdir(parents=True, exist_ok=True)
         TARGET.write_text(expected, encoding="utf-8")
-        print(f"Generated {TARGET.relative_to(TARGET.parents[2])}")
+        CSV_TARGET.write_text(expected_csv, encoding="utf-8")
+        print("Generated deterministic synthetic JSON and CSV from Python.")
         return 0
-    if not TARGET.is_file() or TARGET.read_text(encoding="utf-8") != expected:
+    if (
+        not TARGET.is_file()
+        or TARGET.read_text(encoding="utf-8") != expected
+        or not CSV_TARGET.is_file()
+        or CSV_TARGET.read_text(encoding="utf-8") != expected_csv
+    ):
         parser.exit(1, "Static synthetic fixture is missing or out of sync; run --write.\n")
     print("Synthetic UI fixture verified against Python strategies and SQLite.")
     return 0
