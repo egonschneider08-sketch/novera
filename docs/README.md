@@ -26,3 +26,6 @@ conforme o protocolo. Evidencias de aceitacao ficam nos PRs do GitHub.
 - [Pesquisa sintética demonstrável](research-demo.md): casos PASS/FAIL/UNKNOWN, CLI, JSON e limites da experiência (NV-024).
 
 - [Comparação e exportação sintéticas](research-compare.md): estados por metodologia e JSON/CSV auditáveis, sem ranking (NV-010 fase inicial).
+
+- [Política RBAC por tenant](authorization.md): Viewer, Analyst, Owner e autorização fail-closed, ainda sem login (NV-016 recorte 1).
+- [ADR-0010](adr/ADR-0010-tenant-rbac-policy.md): matrizes de permissões, fronteiras e direitos de dados.
