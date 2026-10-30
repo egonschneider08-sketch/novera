@@ -281,8 +281,10 @@ def test_statement_and_distribution_metadata_roundtrip(store):
         ex_date=DAY,
         payment_date=DAY,
     )
-    assert read(store, statement) == (store.ingest("statement", statement),)
-    assert read(store, dividend) == (store.ingest("dividend", dividend),)
+    saved_statement = store.ingest("statement", statement)
+    assert read(store, statement) == (saved_statement,)
+    saved_dividend = store.ingest("dividend", dividend)
+    assert read(store, dividend) == (saved_dividend,)
 
 
 def test_collection_receipt_new_url_does_not_change_economic_version(store):
