@@ -76,8 +76,7 @@ class Principal:
 
     def __post_init__(self) -> None:
         if not all(
-            _identifier(value)
-            for value in (self.subject, self.tenant, self.credential_revision)
+            _identifier(value) for value in (self.subject, self.tenant, self.credential_revision)
         ):
             raise ValueError("invalid principal identifiers")
         if type(self.role) is not Role or type(self.status) is not MembershipStatus:
