@@ -69,6 +69,20 @@ uv run --offline --locked python -m novera.research_demo --scenario incomplete -
 Este laboratorio **nao** utiliza cotacoes B3 nem pode ser interpretado como
 uma recomendacao. Detalhes: [guia da pesquisa sintetica](docs/research-demo.md).
 
+## Comparação didática e exportações sintéticas
+
+Compare os três cenários do laboratório sem ranking de investimentos ou
+dados de provedores externos. O JSON preserva todas as evidências e o CSV
+expõe critérios, qualidade, unidade e estados de avaliação.
+
+```sh
+uv run --offline --locked python -m novera.research_compare --format text
+uv run --offline --locked python -m novera.research_compare --format json
+uv run --offline --locked python -m novera.research_compare --format csv
+```
+
+Detalhes e limites: [comparação auditável sintética](docs/research-compare.md).
+
 ## Estrutura
 
 ```text
