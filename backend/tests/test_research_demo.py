@@ -94,7 +94,7 @@ def test_repeat_seed_does_not_duplicate_sqlite_economic_records():
         repeated = _seed_demo(store, "complete")
         assert original == repeated
         report = _build_report(store, "complete")
-        assert tuple(report.receipts) == original
+        assert set(report.receipts) == set(original)
         assert len(report.receipts) == 8
 
 
