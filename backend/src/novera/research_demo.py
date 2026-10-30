@@ -141,9 +141,7 @@ def _seed_demo(store: ObservationStore, scenario: str) -> tuple[StoredObservatio
 
     for index in range(1 if scenario == "incomplete" else 5):
         payment_day = day - timedelta(days=180 + index * 365)
-        payment_publication = datetime.combine(
-            payment_day, time(12, tzinfo=timezone.utc)
-        )
+        payment_publication = datetime.combine(payment_day, time(12, tzinfo=timezone.utc))
         records.append(
             (
                 f"cash-payment-{index}",
@@ -207,12 +205,8 @@ def _build_report(store: ObservationStore, scenario: str) -> ResearchReport:
         CashPayment(receipt.record_key, PerShareInput(receipt.observation, SHARE_BASIS))
         for receipt in dividends
     )
-    coverage_period = Period(
-        day - timedelta(days=1824 if complete else 364), day
-    )
-    coverage = _provenance(
-        coverage_period, published_at=AS_OF - timedelta(minutes=20)
-    )
+    coverage_period = Period(day - timedelta(days=1824 if complete else 364), day)
+    coverage = _provenance(coverage_period, published_at=AS_OF - timedelta(minutes=20))
     history = DividendHistory(
         asset=asset,
         payments=cash,
@@ -340,8 +334,11 @@ def render_text(report: ResearchReport) -> str:
         f"Observações recuperadas do SQLite: {len(report.receipts)}",
         (
             "Cobertura dos proventos (somente fixture): "
-            + ("declarada completa" if report.dividend_coverage_certified_by_fixture
-               else "não certificada")
+            + (
+                "declarada completa"
+                if report.dividend_coverage_certified_by_fixture
+                else "não certificada"
+            )
         ),
     ]
     for strategy in report.strategies:
@@ -394,9 +391,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(
         description="Pesquisa demonstrável Novera: cenários financeiros inteiramente fictícios."
     )
-    parser.add_argument(
-        "--scenario", choices=tuple(SCENARIOS), default="complete"
-    )
+    parser.add_argument("--scenario", choices=tuple(SCENARIOS), default="complete")
     parser.add_argument("--format", choices=("text", "json"), default="text")
     args = parser.parse_args(argv)
     report = run_scenario(args.scenario)
