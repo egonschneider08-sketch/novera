@@ -249,3 +249,66 @@ def test_query_through_tampered_economic_row_detected(dbfile):
             outside.execute("UPDATE versions SET economic='{}'")
         with pytest.raises(StorageError):
             read(db)
+
+
+def test_statement_and_distribution_metadata_roundtrip(store):
+    base = observation()
+    published = replace(
+        base.provenance,
+        published_at=NOW - timedelta(days=1),
+        publication_unknown_reason=None,
+    )
+    statement = replace(
+        base,
+        kind=RecordKind.STATEMENT,
+        metric="net_income",
+        unit="currency",
+        currency="BRL",
+        provenance=published,
+        statement_scope="consolidated",
+        statement_basis="duration",
+        revision="restated-2",
+    )
+    dividend = replace(
+        base,
+        kind=RecordKind.DISTRIBUTION,
+        metric="dividend_per_share",
+        unit="currency/share",
+        currency="BRL",
+        provenance=published,
+        distribution_type="dividend",
+        tax_basis="gross",
+        ex_date=DAY,
+        payment_date=DAY,
+    )
+    assert read(store, statement) == (store.ingest("statement", statement),)
+    assert read(store, dividend) == (store.ingest("dividend", dividend),)
+
+
+def test_collection_receipt_new_url_does_not_change_economic_version(store):
+    first = observation()
+    record = store.ingest("same-event", first)
+    alternate = replace(
+        first,
+        provenance=replace(
+            first.provenance,
+            source=replace(
+                first.provenance.source,
+                reference="https://api.bcb.gov.br/dados/serie/bcdata.sgs.432/dados",
+            ),
+        ),
+    )
+    second = store.ingest("same-event", alternate)
+    assert record.version == second.version == 1
+    assert record.content_id == second.content_id
+    assert record.receipt_id != second.receipt_id
+    assert len(read(store)) == 2
+
+
+def test_timezone_offset_preserved_through_database_roundtrip(store):
+    offset = timezone(timedelta(hours=-3))
+    sample = observation(collected_at=NOW.astimezone(offset))
+    saved = store.ingest("offset-event", sample)
+    recovered = read(store)[0]
+    assert recovered == saved
+    assert recovered.observation.provenance.collected_at.utcoffset() == timedelta(hours=-3)
