@@ -2,6 +2,8 @@
 
 import json
 import socket
+import subprocess
+import sys
 from datetime import datetime
 from decimal import Decimal
 
@@ -145,6 +147,28 @@ def test_text_report_is_human_readable_and_explicitly_fictitious(scenario):
     assert "publicado" in rendered
     assert str(report.asset.identifier) in rendered
     assert "recomendação" in rendered
+
+
+def test_installed_module_entrypoint_runs_without_credentials():
+    completed = subprocess.run(
+        [
+            sys.executable,
+            "-m",
+            "novera.research_demo",
+            "--scenario",
+            "incomplete",
+            "--format",
+            "json",
+        ],
+        check=True,
+        capture_output=True,
+        text=True,
+        timeout=10,
+    )
+    payload = json.loads(completed.stdout)
+    assert payload["scenario"] == "incomplete"
+    assert all(item["state"] == "unknown" for item in payload["strategies"])
+    assert completed.stderr == ""
 
 
 def test_cli_outputs_parseable_json_without_html_or_network(capsys):
