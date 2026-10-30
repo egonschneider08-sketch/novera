@@ -1,4 +1,5 @@
 """Integration of the existing provider projections with offline, scoped persistence."""
+
 from datetime import date, datetime, timezone
 from decimal import Decimal
 
@@ -9,7 +10,6 @@ from novera.brapi import BrapiAdapter, BrapiInstrument
 from novera.contracts import Asset, Period
 from novera.http import AccessContext, SecureHttpClient
 from novera.storage import ObservationStore, StorageScope
-
 
 NOW = datetime(2026, 10, 30, 12, tzinfo=timezone.utc)
 DAY = date(2026, 10, 28)
@@ -72,6 +72,4 @@ def test_existing_adapter_contract_roundtrip(provider):
         )
         assert recovered.observation == value
         assert recovered.observation.provenance.collected_at == envelope.fetched_at
-        assert recovered.observation.value == (
-            Decimal("0.15") if provider == "bcb" else Decimal(0)
-        )
+        assert recovered.observation.value == (Decimal("0.15") if provider == "bcb" else Decimal(0))

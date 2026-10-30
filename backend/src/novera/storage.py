@@ -85,7 +85,9 @@ _SCHEMA = (
 
 
 def _json(value: object) -> str:
-    return json.dumps(value, sort_keys=True, ensure_ascii=True, separators=(",", ":"), allow_nan=False)
+    return json.dumps(
+        value, sort_keys=True, ensure_ascii=True, separators=(",", ":"), allow_nan=False
+    )
 
 
 def _digest(value: str) -> str:
@@ -164,7 +166,9 @@ def _wire(value: Observation) -> dict:
             "distribution_type": clean.distribution_type,
             "tax_basis": clean.tax_basis,
             "ex_date": clean.ex_date.isoformat() if clean.ex_date is not None else None,
-            "payment_date": clean.payment_date.isoformat() if clean.payment_date is not None else None,
+            "payment_date": clean.payment_date.isoformat()
+            if clean.payment_date is not None
+            else None,
             "adjustment": clean.adjustment,
             "provenance": {
                 "source": asdict(source),
@@ -191,18 +195,39 @@ def _decode(raw: str) -> Observation:
     try:
         payload = json.loads(raw)
         if not isinstance(payload, dict) or set(payload) != {
-            "asset", "kind", "metric", "value", "quality", "unit", "currency", "reason",
-            "statement_scope", "statement_basis", "revision", "distribution_type",
-            "tax_basis", "ex_date", "payment_date", "adjustment", "provenance",
+            "asset",
+            "kind",
+            "metric",
+            "value",
+            "quality",
+            "unit",
+            "currency",
+            "reason",
+            "statement_scope",
+            "statement_basis",
+            "revision",
+            "distribution_type",
+            "tax_basis",
+            "ex_date",
+            "payment_date",
+            "adjustment",
+            "provenance",
         }:
             raise ValueError
         prov = payload.pop("provenance")
         source = Source(**prov["source"])
-        period = Period(date.fromisoformat(prov["period"]["start"]), date.fromisoformat(prov["period"]["end"]))
+        period = Period(
+            date.fromisoformat(prov["period"]["start"]), date.fromisoformat(prov["period"]["end"])
+        )
         provenance = Provenance(
-            source=source, period=period,
+            source=source,
+            period=period,
             collected_at=datetime.fromisoformat(prov["collected_at"]),
-            published_at=(datetime.fromisoformat(prov["published_at"]) if prov["published_at"] is not None else None),
+            published_at=(
+                datetime.fromisoformat(prov["published_at"])
+                if prov["published_at"] is not None
+                else None
+            ),
             publication_unknown_reason=prov["publication_unknown_reason"],
         )
         item = Observation(
@@ -213,7 +238,9 @@ def _decode(raw: str) -> Observation:
                 "value": (Decimal(payload["value"]) if payload["value"] is not None else None),
                 "quality": Quality(payload["quality"]),
                 "ex_date": date.fromisoformat(payload["ex_date"]) if payload["ex_date"] else None,
-                "payment_date": date.fromisoformat(payload["payment_date"]) if payload["payment_date"] else None,
+                "payment_date": date.fromisoformat(payload["payment_date"])
+                if payload["payment_date"]
+                else None,
                 "provenance": provenance,
             }
         )
@@ -232,10 +259,20 @@ def _economic(payload: str) -> str:
 
 
 def _logical(scope: str, synthetic: int, key: str, observation: Observation) -> str:
-    return _digest(_json([
-        SCHEMA_VERSION, scope, synthetic, key, asdict(observation.asset),
-        observation.kind.value, observation.metric, observation.provenance.source.provider,
-    ]))
+    return _digest(
+        _json(
+            [
+                SCHEMA_VERSION,
+                scope,
+                synthetic,
+                key,
+                asdict(observation.asset),
+                observation.kind.value,
+                observation.metric,
+                observation.provenance.source.provider,
+            ]
+        )
+    )
 
 
 class ObservationStore:
@@ -306,9 +343,12 @@ class ObservationStore:
             or self._db.execute("PRAGMA user_version").fetchone()[0] != SCHEMA_VERSION
         ):
             raise StorageError("unsupported storage schema")
-        actual = {row[0] for row in self._db.execute(
-            "SELECT sql FROM sqlite_master WHERE sql IS NOT NULL AND name NOT LIKE 'sqlite_%'"
-        )}
+        actual = {
+            row[0]
+            for row in self._db.execute(
+                "SELECT sql FROM sqlite_master WHERE sql IS NOT NULL AND name NOT LIKE 'sqlite_%'"
+            )
+        }
         if actual != set(_SCHEMA):
             raise StorageError("unexpected storage schema")
 
@@ -326,7 +366,9 @@ class ObservationStore:
     def ingest(self, record_key: str, observation: Observation) -> StoredObservation:
         return self.ingest_many(((record_key, observation),))[0]
 
-    def ingest_many(self, records: Iterable[tuple[str, Observation]]) -> tuple[StoredObservation, ...]:
+    def ingest_many(
+        self, records: Iterable[tuple[str, Observation]]
+    ) -> tuple[StoredObservation, ...]:
         """One transaction; same economic version can have multiple collection receipts."""
         results: list[StoredObservation] = []
         try:
@@ -346,32 +388,43 @@ class ObservationStore:
                 prefix = (self._scope, self._synthetic, logical_id)
                 existing = self._db.execute(
                     "SELECT version FROM versions WHERE scope=? AND synthetic=? "
-                    "AND logical_id=? AND content_id=?", (*prefix, content_id),
+                    "AND logical_id=? AND content_id=?",
+                    (*prefix, content_id),
                 ).fetchone()
                 if existing:
                     version = existing[0]
                 else:
                     version = self._db.execute(
                         "SELECT COALESCE(MAX(version),0)+1 FROM versions "
-                        "WHERE scope=? AND synthetic=? AND logical_id=?", prefix,
+                        "WHERE scope=? AND synthetic=? AND logical_id=?",
+                        prefix,
                     ).fetchone()[0]
                     period = observation.provenance.period
                     self._db.execute(
                         "INSERT INTO versions VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
-                        (*prefix, key, version, content_id, economic,
-                         observation.asset.namespace, observation.asset.identifier,
-                         observation.kind.value, observation.metric,
-                         observation.provenance.source.provider,
-                         period.start.isoformat(), period.end.isoformat()),
+                        (
+                            *prefix,
+                            key,
+                            version,
+                            content_id,
+                            economic,
+                            observation.asset.namespace,
+                            observation.asset.identifier,
+                            observation.kind.value,
+                            observation.metric,
+                            observation.provenance.source.provider,
+                            period.start.isoformat(),
+                            period.end.isoformat(),
+                        ),
                     )
                 self._db.execute(
                     "INSERT INTO collections VALUES (?,?,?,?,?,?) "
                     "ON CONFLICT(scope,synthetic,logical_id,receipt_id) DO NOTHING",
                     (*prefix, version, receipt_id, payload),
                 )
-                results.append(StoredObservation(
-                    logical_id, key, version, content_id, receipt_id, observation
-                ))
+                results.append(
+                    StoredObservation(logical_id, key, version, content_id, receipt_id, observation)
+                )
             self._db.commit()
         except Exception:
             self._db.rollback()
@@ -382,13 +435,22 @@ class ObservationStore:
         return tuple(results)
 
     def query(
-        self, *, asset: Asset, kind: RecordKind, metric: str, period: Period,
-        version: int | None = None, provider: str | None = None,
+        self,
+        *,
+        asset: Asset,
+        kind: RecordKind,
+        metric: str,
+        period: Period,
+        version: int | None = None,
+        provider: str | None = None,
     ) -> tuple[StoredObservation, ...]:
         """All matching version receipts overlapping the period. Never guess 'latest'."""
         if (
-            type(asset) is not Asset or not isinstance(kind, RecordKind)
-            or type(period) is not Period or not isinstance(metric, str) or not metric.strip()
+            type(asset) is not Asset
+            or not isinstance(kind, RecordKind)
+            or type(period) is not Period
+            or not isinstance(metric, str)
+            or not metric.strip()
             or (version is not None and (type(version) is not int or version < 1))
             or (provider is not None and (not isinstance(provider, str) or not provider.strip()))
         ):
@@ -402,9 +464,18 @@ class ObservationStore:
                 "AND (? IS NULL OR v.version=?) AND (? IS NULL OR provider=?) "
                 "ORDER BY logical_id, v.version, receipt_id",
                 (
-                    self._scope, self._synthetic, asset.namespace, asset.identifier,
-                    kind.value, metric, period.end.isoformat(), period.start.isoformat(),
-                    version, version, provider, provider,
+                    self._scope,
+                    self._synthetic,
+                    asset.namespace,
+                    asset.identifier,
+                    kind.value,
+                    metric,
+                    period.end.isoformat(),
+                    period.start.isoformat(),
+                    version,
+                    version,
+                    provider,
+                    provider,
                 ),
             )
             results = []
@@ -429,10 +500,16 @@ class ObservationStore:
                     or observation.provenance.source.provider != row["provider"]
                 ):
                     raise StorageError("stored data integrity failure")
-                results.append(StoredObservation(
-                    logical, row["record_key"], row["version"],
-                    row["content_id"], row["receipt_id"], observation,
-                ))
+                results.append(
+                    StoredObservation(
+                        logical,
+                        row["record_key"],
+                        row["version"],
+                        row["content_id"],
+                        row["receipt_id"],
+                        observation,
+                    )
+                )
             return tuple(results)
         except (sqlite3.Error, StorageError, TypeError, ValueError):
             raise StorageError("stored data integrity failure or failed query") from None
