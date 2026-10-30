@@ -118,6 +118,11 @@ class BrapiAdapter:
             raise ValueError("explicit synthetic flag and clock required")
         self._client, self._synthetic, self._now = client, synthetic, now
 
+    @property
+    def synthetic(self) -> bool:
+        """Public read-only provenance label; not a network-isolation guarantee."""
+        return self._synthetic
+
     def quote(
         self,
         instrument: BrapiInstrument,
