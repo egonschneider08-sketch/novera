@@ -293,10 +293,26 @@ def report_json(report: ResearchReport) -> dict:
                 "state": strategy.state.value,
                 "as_of": strategy.as_of.isoformat(),
                 "synthetic": strategy.synthetic,
+                "coverage": (
+                    {
+                        "source": strategy.coverage.source.provider,
+                        "synthetic": strategy.coverage.source.synthetic,
+                        "start": strategy.coverage.period.start.isoformat(),
+                        "end": strategy.coverage.period.end.isoformat(),
+                        "collected_at": strategy.coverage.collected_at.isoformat(),
+                        "published_at": strategy.coverage.published_at.isoformat()
+                        if strategy.coverage.published_at is not None
+                        else None,
+                        "complete_by_fixture": report.dividend_coverage_certified_by_fixture,
+                    }
+                    if strategy.coverage is not None
+                    else None
+                ),
                 "metrics": [
                     {
                         "name": metric.name,
                         "value": str(metric.value) if metric.value is not None else None,
+                        "quality": metric.quality.value,
                         "unit": metric.unit,
                         "currency": metric.currency,
                         "period": {
