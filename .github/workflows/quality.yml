@@ -36,8 +36,6 @@ jobs:
         run: uv sync --locked --group dev
       - name: Lint
         run: uv run --offline --locked ruff check .
-      - name: Temporary formatter diff (inspection only)
-        run: uv run --offline --locked ruff format --diff . || true
       - name: Format
         run: uv run --offline --locked ruff format --check .
       - name: Tests (no provider credentials)
