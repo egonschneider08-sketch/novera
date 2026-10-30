@@ -80,7 +80,7 @@ export type ParsedComparison =
 const scenarioIds = new Set<ScenarioName>(["complete", "expensive", "incomplete"]);
 const evaluationStates = new Set<EvaluationState>(["pass", "fail", "unknown"]);
 const qualities = new Set<DataQuality>(["present", "missing", "invalid", "not_applicable"]);
-const decimal = /^-?(?:0|[1-9]\d*)(?:\.\d+)?$/;
+const decimal = /^-?(?:0|[1-9]\d*)(?:\.\d+)?(?:[eE][+-]?\d+)?$/;
 const sha256 = /^[0-9a-f]{64}$/;
 
 function object(value: unknown): value is Record<string, unknown> {
