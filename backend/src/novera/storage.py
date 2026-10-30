@@ -291,6 +291,15 @@ class ObservationStore:
         self._db.execute("PRAGMA foreign_keys=ON")
         self._db.execute("PRAGMA synchronous=FULL")
 
+    @property
+    def scope(self) -> StorageScope:
+        """Read-only active authorization scope, never a secret."""
+        return StorageScope(**json.loads(self._scope))
+
+    @property
+    def synthetic(self) -> bool:
+        return bool(self._synthetic)
+
     @classmethod
     def memory(cls, *, scope: StorageScope, synthetic: bool) -> "ObservationStore":
         store = cls(sqlite3.connect(":memory:", isolation_level=None), scope, synthetic)
