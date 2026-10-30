@@ -122,6 +122,13 @@ def evaluate(
         return Decision(False, DecisionCode.INVALID_CONTEXT)
     if type(principal) is not Principal:
         return Decision(False, DecisionCode.UNAUTHENTICATED)
+    # Frozen dataclass fields can still be tampered with via object.__setattr__.
+    # Revalidate on every authorization decision, not only on construction.
+    try:
+        scope.__post_init__()
+        principal.__post_init__()
+    except (TypeError, ValueError):
+        return Decision(False, DecisionCode.INVALID_CONTEXT)
     if principal.status is not MembershipStatus.ACTIVE:
         return Decision(False, DecisionCode.INACTIVE_MEMBERSHIP)
     if (
