@@ -133,9 +133,9 @@ def test_mutating_http_methods_are_not_allowed(client, method, path):
 
 
 def test_unreviewed_query_parameters_are_rejected_without_ignoring_them(client):
-    response = client.get("/api/v1/demo/comparison?provider=brapi&token=never")
+    response = client.get("/api/v1/demo/comparison?provider=brapi&unknown=ignored")
     assert response.status_code == 400
-    assert "never" not in response.text
+    assert "ignored" not in response.text
     assert "brapi" not in response.text
 
 
@@ -208,7 +208,7 @@ def test_contract_rejects_quality_mismatch_and_undeclared_fields():
     with pytest.raises(ValidationError):
         ReportOut.model_validate(raw)
     raw = report_json(run_scenario("complete"))
-    raw["secret_token"] = "never-persist"
+    raw["unreviewed_field"] = "unexpected-value"
     with pytest.raises(ValidationError):
         ReportOut.model_validate(raw)
 
