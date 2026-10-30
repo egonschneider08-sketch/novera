@@ -36,16 +36,18 @@ PERIOD = Period(DAY, DAY)
 
 def brapi_payload(price=0):
     return {
-        "results": [{
-            "requestedSymbol": "TEST3",
-            "symbol": "TEST3",
-            "changed": False,
-            "data": {
-                "currency": "BRL",
-                "regularMarketTime": "2026-10-28T13:00:00-03:00",
-                "regularMarketPrice": price,
-            },
-        }],
+        "results": [
+            {
+                "requestedSymbol": "TEST3",
+                "symbol": "TEST3",
+                "changed": False,
+                "data": {
+                    "currency": "BRL",
+                    "regularMarketTime": "2026-10-28T13:00:00-03:00",
+                    "regularMarketPrice": price,
+                },
+            }
+        ],
         "requestedAt": "2026-10-28T16:01:00Z",
     }
 
@@ -66,15 +68,25 @@ def services():
 
     clock = LabClock()
 
-    def build(store, *, brapi_handler=None, bcb_handler=None, brapi_synthetic=True,
-              bcb_synthetic=True, enabled=True, context=CONTEXT):
+    def build(
+        store,
+        *,
+        brapi_handler=None,
+        bcb_handler=None,
+        brapi_synthetic=True,
+        bcb_synthetic=True,
+        enabled=True,
+        context=CONTEXT,
+    ):
         adapters = {}
         policy = RetryPolicy(min_interval=0, max_retries=0)
         if brapi_handler is not None:
             client = SecureHttpClient(
-                "brapi", "https://brapi.dev",
+                "brapi",
+                "https://brapi.dev",
                 transport=httpx.MockTransport(brapi_handler),
-                policy=policy, now=lambda: clock.now,
+                policy=policy,
+                now=lambda: clock.now,
             )
             clients.append(client)
             adapters["brapi"] = BrapiAdapter(
@@ -82,15 +94,19 @@ def services():
             )
         if bcb_handler is not None:
             client = SecureHttpClient(
-                "bcb", "https://api.bcb.gov.br",
+                "bcb",
+                "https://api.bcb.gov.br",
                 transport=httpx.MockTransport(bcb_handler),
-                policy=policy, now=lambda: clock.now,
+                policy=policy,
+                now=lambda: clock.now,
             )
             clients.append(client)
             adapters["bcb"] = BcbAdapter(client, synthetic=bcb_synthetic, now=lambda: clock.now)
-        return FinancialPipeline(
-            store, context=context, enabled=enabled, **adapters
-        ), clock, adapters
+        return (
+            FinancialPipeline(store, context=context, enabled=enabled, **adapters),
+            clock,
+            adapters,
+        )
 
     yield build
     for client in clients:
@@ -116,8 +132,13 @@ def test_mixed_provider_batch_preserves_financial_contracts(store, services):
     calls = []
     pipeline, _, _ = services(
         store,
-        brapi_handler=lambda r: (calls.append(r.url.host), httpx.Response(200, json=brapi_payload()))[1],
-        bcb_handler=lambda r: (calls.append(r.url.host), httpx.Response(200, json=bcb_payload()))[1],
+        brapi_handler=lambda r: (
+            calls.append(r.url.host),
+            httpx.Response(200, json=brapi_payload()),
+        )[1],
+        bcb_handler=lambda r: (calls.append(r.url.host), httpx.Response(200, json=bcb_payload()))[
+            1
+        ],
     )
     result = pipeline.run((QuoteRequest(INSTRUMENT), SgsRequest(PERIOD)))
     assert calls == ["brapi.dev", "api.bcb.gov.br"]
@@ -144,6 +165,7 @@ def test_mixed_provider_batch_preserves_financial_contracts(store, services):
 
 def test_repeated_run_is_idempotent_and_new_collection_is_not_revision(store, services):
     calls = []
+
     def handler(request):
         calls.append(request)
         return httpx.Response(200, json=bcb_payload())
@@ -183,22 +205,32 @@ def test_any_provider_failure_leaves_zero_records(store, services, which):
     def bcb_handler(_):
         return httpx.Response(503 if which == "bcb" else 200, json=bcb_payload())
 
-    pipeline, _, _ = services(
-        store, brapi_handler=brapi_handler, bcb_handler=bcb_handler
-    )
-    tasks = (SgsRequest(PERIOD), QuoteRequest(INSTRUMENT)) if which == "brapi" else (
-        QuoteRequest(INSTRUMENT), SgsRequest(PERIOD)
+    pipeline, _, _ = services(store, brapi_handler=brapi_handler, bcb_handler=bcb_handler)
+    tasks = (
+        (SgsRequest(PERIOD), QuoteRequest(INSTRUMENT))
+        if which == "brapi"
+        else (QuoteRequest(INSTRUMENT), SgsRequest(PERIOD))
     )
     with pytest.raises(FetchError):
         pipeline.run(tasks)
-    assert store.query(
-        asset=INSTRUMENT.asset, kind=RecordKind.PRICE,
-        metric="regular_market_price", period=PERIOD,
-    ) == ()
-    assert store.query(
-        asset=Asset("bcb.sgs", "432"), kind=RecordKind.INDICATOR,
-        metric="selic_target", period=PERIOD,
-    ) == ()
+    assert (
+        store.query(
+            asset=INSTRUMENT.asset,
+            kind=RecordKind.PRICE,
+            metric="regular_market_price",
+            period=PERIOD,
+        )
+        == ()
+    )
+    assert (
+        store.query(
+            asset=Asset("bcb.sgs", "432"),
+            kind=RecordKind.INDICATOR,
+            metric="selic_target",
+            period=PERIOD,
+        )
+        == ()
+    )
 
 
 @pytest.mark.parametrize("provider", ["brapi", "bcb"])
@@ -208,23 +240,31 @@ def test_bad_schema_fails_atomically_without_stale_or_partial_data(store, servic
     pipeline, _, _ = services(
         store,
         brapi_handler=lambda _: httpx.Response(200, json=invalid)
-        if provider == "brapi" else httpx.Response(200, json=brapi_payload()),
+        if provider == "brapi"
+        else httpx.Response(200, json=brapi_payload()),
         bcb_handler=lambda _: httpx.Response(200, json=[{"data": "bad", "valor": "10"}])
-        if provider == "bcb" else httpx.Response(200, json=bcb_payload()),
+        if provider == "bcb"
+        else httpx.Response(200, json=bcb_payload()),
     )
     with pytest.raises(FetchError) as error:
         pipeline.run((QuoteRequest(INSTRUMENT), SgsRequest(PERIOD)))
     assert error.value.kind is FailureKind.INVALID_RESPONSE
-    assert store.query(
-        asset=INSTRUMENT.asset, kind=RecordKind.PRICE,
-        metric="regular_market_price", period=PERIOD,
-    ) == ()
+    assert (
+        store.query(
+            asset=INSTRUMENT.asset,
+            kind=RecordKind.PRICE,
+            metric="regular_market_price",
+            period=PERIOD,
+        )
+        == ()
+    )
 
 
 def test_default_execution_disabled_even_with_mock_transport(store, services):
     seen = []
     pipeline, _, _ = services(
-        store, bcb_handler=lambda r: (seen.append(r), httpx.Response(200, json=[]))[1],
+        store,
+        bcb_handler=lambda r: (seen.append(r), httpx.Response(200, json=[]))[1],
         enabled=False,
     )
     with pytest.raises(PipelineError, match="disabled"):
@@ -255,9 +295,11 @@ def test_non_synthetic_adapter_disallowed(store, services, provider):
         services(
             store,
             brapi_handler=(lambda r: httpx.Response(200, json=brapi_payload()))
-            if provider == "brapi" else None,
+            if provider == "brapi"
+            else None,
             bcb_handler=(lambda r: httpx.Response(200, json=bcb_payload()))
-            if provider == "bcb" else None,
+            if provider == "bcb"
+            else None,
             brapi_synthetic=(provider != "brapi"),
             bcb_synthetic=(provider != "bcb"),
         )
@@ -287,7 +329,8 @@ def test_batch_limit_preflight_prevents_network_calls(store, services):
 def test_sgs_window_bound_preflight_prevents_prior_quote_fetch(store, services):
     seen = []
     pipeline, _, _ = services(
-        store, brapi_handler=lambda r: (seen.append(r), httpx.Response(200, json=brapi_payload()))[1],
+        store,
+        brapi_handler=lambda r: (seen.append(r), httpx.Response(200, json=brapi_payload()))[1],
         bcb_handler=lambda _: httpx.Response(200, json=[]),
     )
     bad_period = Period(date(2024, 1, 1), date(2025, 1, 2))
@@ -324,15 +367,22 @@ def test_stale_envelope_rejected_without_persisting(store, services, monkeypatch
         store, bcb_handler=lambda _: httpx.Response(200, json=bcb_payload())
     )
     original = adapters["bcb"].selic_target
+
     def stale(*args, **kwargs):
         return replace(original(*args, **kwargs), freshness=Freshness.STALE)
+
     monkeypatch.setattr(adapters["bcb"], "selic_target", stale)
     with pytest.raises(PipelineError, match="stale"):
         pipeline.run((SgsRequest(PERIOD),))
-    assert store.query(
-        asset=Asset("bcb.sgs", "432"), kind=RecordKind.INDICATOR,
-        metric="selic_target", period=PERIOD,
-    ) == ()
+    assert (
+        store.query(
+            asset=Asset("bcb.sgs", "432"),
+            kind=RecordKind.INDICATOR,
+            metric="selic_target",
+            period=PERIOD,
+        )
+        == ()
+    )
 
 
 def test_empty_sgs_window_is_not_claimed_to_be_zero_or_complete(store, services):
@@ -341,9 +391,7 @@ def test_empty_sgs_window_is_not_claimed_to_be_zero_or_complete(store, services)
     result = pipeline.run((SgsRequest(period),))
     assert result.records == ()
     assert result.tasks[0].received == 0
-    assert result.tasks[0].unreturned_dates == (
-        date(2026, 10, 26), date(2026, 10, 27), DAY
-    )
+    assert result.tasks[0].unreturned_dates == (date(2026, 10, 26), date(2026, 10, 27), DAY)
 
 
 def test_sgs_missing_zero_and_invalid_qualities_preserved(store, services):
@@ -356,7 +404,9 @@ def test_sgs_missing_zero_and_invalid_qualities_preserved(store, services):
     pipeline, _, _ = services(store, bcb_handler=lambda _: httpx.Response(200, json=body))
     result = pipeline.run((SgsRequest(period),))
     assert [x.observation.quality for x in result.records] == [
-        Quality.PRESENT, Quality.MISSING, Quality.INVALID
+        Quality.PRESENT,
+        Quality.MISSING,
+        Quality.INVALID,
     ]
     assert [x.observation.value for x in result.records] == [Decimal(0), None, None]
     assert all(r.version == 1 for r in result.records)
