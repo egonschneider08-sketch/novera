@@ -115,7 +115,8 @@ def test_csv_has_fixed_schema_quality_and_source_without_float_conversion():
 def test_csv_incomplete_eps_never_appears_as_zero():
     csv_rows = list(csv.DictReader(io.StringIO(comparison_csv(compare_scenarios(["incomplete"])))))
     entries = [
-        row for row in csv_rows
+        row
+        for row in csv_rows
         if row["methodology"] == "graham-number-partial"
         and row["row_type"] == "metric"
         and row["name"] == "graham_number"
