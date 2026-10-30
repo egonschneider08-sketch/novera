@@ -26,3 +26,6 @@ conforme o protocolo. Evidencias de aceitacao ficam nos PRs do GitHub.
 - [Pesquisa sintética demonstrável](research-demo.md): casos PASS/FAIL/UNKNOWN, CLI, JSON e limites da experiência (NV-024).
 
 - [Comparação e exportação sintéticas](research-compare.md): estados por metodologia e JSON/CSV auditáveis, sem ranking (NV-010 fase inicial).
+
+- [API FastAPI de laboratório](demo-api.md): endpoints v1 de cenários fictícios, contratos e controles locais (NV-014).
+- [ADR-0009](adr/ADR-0009-versioned-synthetic-demo-api.md): decisão de FastAPI, validações e limites de segurança.
