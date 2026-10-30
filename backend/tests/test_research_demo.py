@@ -48,9 +48,7 @@ def test_complete_fixture_calculations_use_stored_decimal_observations():
     assert next(item.value for item in graham.metrics if item.name == "graham_number") == Decimal(
         "30"
     )
-    assert next(item.value for item in graham.metrics if item.name == "margin") == Decimal(
-        "2.75"
-    )
+    assert next(item.value for item in graham.metrics if item.name == "margin") == Decimal("2.75")
     assert next(item.value for item in bazin.metrics if item.name == "bazin_ceiling") == Decimal(
         "10"
     )
@@ -76,7 +74,9 @@ def test_missing_eps_and_uncertified_dividend_coverage_remain_unknown():
     report = run_scenario("incomplete")
     assert len(report.receipts) == 4
     assert not report.dividend_coverage_certified_by_fixture
-    eps = next(x.observation for x in report.receipts if x.observation.metric == "earnings_per_share")
+    eps = next(
+        x.observation for x in report.receipts if x.observation.metric == "earnings_per_share"
+    )
     assert eps.value is None and eps.quality is Quality.MISSING
     assert eps.reason
     graham, bazin = report.strategies
@@ -152,7 +152,9 @@ def test_cli_outputs_parseable_json_without_html_or_network(capsys):
     assert "não certificada" in text_out
 
 
-@pytest.mark.parametrize("args", [["--scenario", "not-real"], ["--format", "xml"], ["--secret", "x"]])
+@pytest.mark.parametrize(
+    "args", [["--scenario", "not-real"], ["--format", "xml"], ["--secret", "x"]]
+)
 def test_cli_rejects_unsupported_parameters(args):
     with pytest.raises(SystemExit) as error:
         main(args)
@@ -179,7 +181,9 @@ def test_all_dates_and_receipts_are_consistent():
     for item in report.receipts:
         assert item.observation.provenance.collected_at <= report.as_of
         assert item.observation.provenance.published_at <= report.as_of
-        assert isinstance(datetime.fromisoformat(item.observation.provenance.collected_at.isoformat()), datetime)
+        assert isinstance(
+            datetime.fromisoformat(item.observation.provenance.collected_at.isoformat()), datetime
+        )
         assert item.observation.asset == report.asset
         assert item.version == 1
     assert len({receipt.record_key for receipt in report.receipts}) == len(report.receipts)
