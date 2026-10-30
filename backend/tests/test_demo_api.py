@@ -6,11 +6,10 @@ import socket
 
 import pytest
 from fastapi.testclient import TestClient
-from pydantic import ValidationError
-
 from novera.demo_api import ReportOut, create_app
 from novera.research_compare import compare_scenarios, comparison_csv, comparison_json
 from novera.research_demo import report_json, run_scenario
+from pydantic import ValidationError
 
 
 @pytest.fixture
