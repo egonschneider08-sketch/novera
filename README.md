@@ -83,6 +83,18 @@ uv run --offline --locked python -m novera.research_compare --format csv
 
 Detalhes e limites: [comparação auditável sintética](docs/research-compare.md).
 
+## Contrato de autorização por papéis — NV-016 (fase 1)
+
+O módulo `novera.authorization` implementa uma política **pura** de
+papéis Viewer, Analyst e Owner, que exige tenant, entitlement, membership
+ativa e revisão de sessão consistentes com o StorageScope. Exportar dados
+financeiros reais permanece negado mesmo para Owner.
+
+**Isso ainda não é cadastro ou login.** O sistema não verifica credenciais,
+não emite sessões e não permite acesso real por usuários. O tipo Principal
+só poderá ser criado por uma camada de identidade confiável, após validação
+no servidor. Consulte [guia de autorização](docs/authorization.md).
+
 ## Estrutura
 
 ```text
