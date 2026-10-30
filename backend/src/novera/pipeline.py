@@ -34,8 +34,7 @@ class QuoteRequest:
         if type(self.instrument) is not BrapiInstrument:
             raise ValueError("verified brapi instrument required")
         if self.token is not None and (
-            not isinstance(self.token, str)
-            or not re.fullmatch(r"[A-Za-z0-9._~+/=-]+", self.token)
+            not isinstance(self.token, str) or not re.fullmatch(r"[A-Za-z0-9._~+/=-]+", self.token)
         ):
             raise ValueError("invalid bearer credential format")
 
@@ -68,9 +67,7 @@ class PipelineRun:
     tasks: tuple[TaskReport, ...]
 
 
-def _validate_observation(
-    item: Observation, envelope: JsonEnvelope, provider: str
-) -> None:
+def _validate_observation(item: Observation, envelope: JsonEnvelope, provider: str) -> None:
     if (
         type(item) is not Observation
         or item.provenance.source.provider != provider
@@ -145,9 +142,13 @@ class FinancialPipeline:
             raise PipelineError("stale policy is forbidden for pipeline ingestion")
         if not isinstance(requests, (tuple, list)) or not 0 < len(requests) <= MAX_TASKS:
             raise PipelineError("explicit bounded request sequence required")
-        if self._store.scope != StorageScope(
-            self._context.tenant, self._context.entitlement, self._context.credential_revision
-        ) or self._store.synthetic is not True:
+        if (
+            self._store.scope
+            != StorageScope(
+                self._context.tenant, self._context.entitlement, self._context.credential_revision
+            )
+            or self._store.synthetic is not True
+        ):
             raise PipelineError("storage access context changed")
 
         # Preflight the whole batch before any provider is contacted.
@@ -211,8 +212,11 @@ class FinancialPipeline:
                     pending.append((key, observation))
                 reports.append(
                     TaskReport(
-                        "bcb", result.freshness, result.fetched_at,
-                        len(result.data.observations), result.data.unreturned_dates,
+                        "bcb",
+                        result.freshness,
+                        result.fetched_at,
+                        len(result.data.observations),
+                        result.data.unreturned_dates,
                     )
                 )
 
