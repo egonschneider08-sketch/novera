@@ -38,6 +38,7 @@ jobs:
           for name, path in [
               ("FIXTURE", Path("frontend/src/data/scenarios.json")),
               ("LOCK", Path("frontend/package-lock.json")),
+              ("CSV", Path("frontend/src/data/comparison.csv")),
           ]:
               print(f"---BEGIN_NOVERA_{name}---")
               print(path.read_text(encoding="utf-8"), end="")
