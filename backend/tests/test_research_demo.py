@@ -119,9 +119,17 @@ def test_deterministic_json_has_full_evidence_and_no_float_values(scenario):
         assert obs["collected_at"] and obs["published_at"]
         assert len(obs["content_id"]) == 64
         assert len(obs["receipt_id"]) == 64
+    assert first["strategies"][0]["coverage"] is None
+    bazin_coverage = first["strategies"][1]["coverage"]
+    assert bazin_coverage["source"] == "novera-synthetic-fixture"
+    assert bazin_coverage["synthetic"] is True
+    assert bazin_coverage["complete_by_fixture"] is (scenario != "incomplete")
+    assert bazin_coverage["published_at"]
     for strategy in first["strategies"]:
         for metric in strategy["metrics"]:
             assert type(metric["value"]) is str or metric["value"] is None
+            assert metric["quality"] in {"present", "missing"}
+            assert (metric["value"] is None) is (metric["quality"] == "missing")
             assert metric["reason"]
         assert all(check["reason"] for check in strategy["criteria"])
 
