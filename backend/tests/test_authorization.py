@@ -98,9 +98,10 @@ def test_tenant_entitlement_and_session_revision_must_match(scope, expected):
 
 def test_revoked_entitlement_is_fail_closed():
     principal = replace(member(Role.OWNER), entitlements=frozenset({"demo"}))
-    assert evaluate(
-        principal, SCOPE, Permission.MANAGE_USERS, synthetic=True
-    ).code is DecisionCode.NO_ENTITLEMENT
+    assert (
+        evaluate(principal, SCOPE, Permission.MANAGE_USERS, synthetic=True).code
+        is DecisionCode.NO_ENTITLEMENT
+    )
 
 
 @pytest.mark.parametrize(
@@ -109,17 +110,16 @@ def test_revoked_entitlement_is_fail_closed():
 )
 def test_suspended_membership_blocks_even_read_only_access(role):
     principal = member(role, status=MembershipStatus.SUSPENDED)
-    assert evaluate(
-        principal, SCOPE, Permission.VIEW_PRODUCTS, synthetic=True
-    ).code is DecisionCode.INACTIVE_MEMBERSHIP
+    assert (
+        evaluate(principal, SCOPE, Permission.VIEW_PRODUCTS, synthetic=True).code
+        is DecisionCode.INACTIVE_MEMBERSHIP
+    )
 
 
 def test_require_permission_never_echoes_tenant_or_user_identifiers():
     principal = replace(member(Role.VIEWER), tenant="company-b")
     with pytest.raises(AccessDenied) as caught:
-        require_permission(
-            principal, SCOPE, Permission.VIEW_RESEARCH, synthetic=True
-        )
+        require_permission(principal, SCOPE, Permission.VIEW_RESEARCH, synthetic=True)
     assert str(caught.value) == "access denied"
     assert "company-a" not in str(caught.value)
     assert "company-b" not in str(caught.value)
@@ -179,15 +179,17 @@ def test_invalid_permission_or_synthetic_flag_fail_closed():
 def test_mutated_frozen_principal_or_scope_are_revalidated_each_time():
     principal = member(Role.OWNER)
     object.__setattr__(principal, "role", "owner")
-    assert evaluate(
-        principal, SCOPE, Permission.MANAGE_USERS, synthetic=True
-    ).code is DecisionCode.INVALID_CONTEXT
+    assert (
+        evaluate(principal, SCOPE, Permission.MANAGE_USERS, synthetic=True).code
+        is DecisionCode.INVALID_CONTEXT
+    )
 
     scope = StorageScope("company-a", "research-basic", "session-v1")
     object.__setattr__(scope, "tenant", "")
-    assert evaluate(
-        member(Role.OWNER), scope, Permission.VIEW_PRODUCTS, synthetic=True
-    ).code is DecisionCode.INVALID_CONTEXT
+    assert (
+        evaluate(member(Role.OWNER), scope, Permission.VIEW_PRODUCTS, synthetic=True).code
+        is DecisionCode.INVALID_CONTEXT
+    )
 
 
 def test_evaluate_is_deterministic_pure_policy_and_never_grants_cross_tenant_owner():
@@ -196,9 +198,13 @@ def test_evaluate_is_deterministic_pure_policy_and_never_grants_cross_tenant_own
     assert evaluate(owner, wrong_tenant, Permission.MANAGE_ENTITLEMENTS, synthetic=False) == (
         evaluate(owner, wrong_tenant, Permission.MANAGE_ENTITLEMENTS, synthetic=False)
     )
-    assert not evaluate(owner, wrong_tenant, Permission.MANAGE_ENTITLEMENTS, synthetic=False).allowed
+    assert not evaluate(
+        owner, wrong_tenant, Permission.MANAGE_ENTITLEMENTS, synthetic=False
+    ).allowed
 
 
 def test_positive_require_permission_return_has_no_authentication_side_effects():
-    assert require_permission(member(Role.ANALYST), SCOPE, Permission.VIEW_RESEARCH,
-                              synthetic=True) is None
+    assert (
+        require_permission(member(Role.ANALYST), SCOPE, Permission.VIEW_RESEARCH, synthetic=True)
+        is None
+    )
