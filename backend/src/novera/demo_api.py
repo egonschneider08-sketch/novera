@@ -11,7 +11,7 @@ from typing import Annotated, Literal
 
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.responses import JSONResponse, Response
-from pydantic import BaseModel, ConfigDict, StringConstraints, model_validator
+from pydantic import BaseModel, ConfigDict, Field, StringConstraints, model_validator
 from starlette.middleware.trustedhost import TrustedHostMiddleware
 
 from novera.research_compare import compare_scenarios, comparison_csv, comparison_json
@@ -123,7 +123,7 @@ class StrategyOut(StrictRecord):
 
 
 class ReportOut(StrictRecord):
-    schema: Literal["novera-synthetic-research-v1"]
+    schema_version: Literal["novera-synthetic-research-v1"] = Field(alias="schema")
     scenario: ScenarioId
     label: str
     asset: AssetOut
@@ -137,7 +137,7 @@ class ReportOut(StrictRecord):
 
 
 class ComparisonOut(StrictRecord):
-    schema: Literal["novera-synthetic-comparison-v1"]
+    schema_version: Literal["novera-synthetic-comparison-v1"] = Field(alias="schema")
     synthetic: Literal[True]
     disclaimer: str
     ordering: Literal["user_selection_not_investment_ranking"]
