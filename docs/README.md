@@ -24,3 +24,5 @@ conforme o protocolo. Evidencias de aceitacao ficam nos PRs do GitHub.
 - [Pipeline financeiro](pipeline.md): execução opt-in, lote atômico de brapi/BCB e limites de acesso.
 
 - [Pesquisa sintética demonstrável](research-demo.md): casos PASS/FAIL/UNKNOWN, CLI, JSON e limites da experiência (NV-024).
+
+- [Comparação e exportação sintéticas](research-compare.md): estados por metodologia e JSON/CSV auditáveis, sem ranking (NV-010 fase inicial).
