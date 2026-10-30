@@ -30,7 +30,7 @@ jobs:
           node-version: '22'
       - name: Resolve pinned frontend dependencies
         working-directory: frontend
-        run: npm ci --ignore-scripts --no-fund && npm run build && npm run test && npm audit --omit=dev --audit-level=high
+        run: npm ci --ignore-scripts --no-fund && npm run build && npm run test && npm audit --omit=dev --audit-level=high && (npm audit --audit-level=high || true)
       - name: Export generated UTF-8 manifest/lock in job logs for reviewed GitHub commit
         run: |
           python - <<'PY'
