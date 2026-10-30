@@ -18,3 +18,5 @@ conforme o protocolo. Evidencias de aceitacao ficam nos PRs do GitHub.
 - [Adaptador brapi v2](brapi-adapter.md): cotacao de um ativo, metadados e limites oficiais.
 
 - [Adaptador BCB SGS 432](bcb-adapter.md): meta Selic, unidade anual, datas e lacunas.
+
+- [Armazenamento financeiro local](storage.md): idempotencia, versoes, segregacao e limites (NV-009).
