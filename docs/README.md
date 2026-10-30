@@ -16,3 +16,5 @@ conforme o protocolo. Evidencias de aceitacao ficam nos PRs do GitHub.
 - [Cliente HTTP seguro](http-client.md): GET, cache por acesso, freshness e limites.
 
 - [Adaptador brapi v2](brapi-adapter.md): cotacao de um ativo, metadados e limites oficiais.
+
+- [Adaptador BCB SGS 432](bcb-adapter.md): meta Selic, unidade anual, datas e lacunas.

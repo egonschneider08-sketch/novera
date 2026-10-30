@@ -28,7 +28,7 @@ uv run --locked pytest -q
 ```
 
 Para revisar a NV-002 antes do merge, use
-`--branch feature/NV-002-brapi-quote-adapter` no clone acima. O destino explicito cria um checkout separado, sem reutilizar `.venv`
+`--branch feature/NV-002-bcb-sgs-adapter` no clone acima. O destino explicito cria um checkout separado, sem reutilizar `.venv`
 ou arquivos nao versionados do checkout de trabalho. Dependencias podem ser
 reutilizadas do cache global do uv; isto nao simula uma maquina sem cache.
 
@@ -91,3 +91,6 @@ Cliente HTTP GET, politicas e exemplo offline: [HTTP seguro](docs/http-client.md
 
 Primeiro adaptador de cotacao, validado somente com dados sinteticos:
 [brapi v2](docs/brapi-adapter.md). Sem coleta automatica ou credenciais no ambiente de testes.
+
+Serie economica inicial, conversao Decimal e testes offline:
+[BCB SGS 432](docs/bcb-adapter.md).
