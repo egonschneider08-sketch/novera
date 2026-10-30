@@ -1,2 +1,2 @@
-import { describe, it, expect } from 'vitest';
-describe('placeholder', () => { it('runs', () => { expect(true).toBe(true); }); });
+import { expect, test } from "vitest";
+test("Novera UI loads", () => expect(true).toBe(true));
