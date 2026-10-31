@@ -27,5 +27,12 @@ conforme o protocolo. Evidencias de aceitacao ficam nos PRs do GitHub.
 
 - [Comparação e exportação sintéticas](research-compare.md): estados por metodologia e JSON/CSV auditáveis, sem ranking (NV-010 fase inicial).
 
+- [Interface web sintética React](../frontend/README.md): UX LAB-A/B/C, metodologia, proveniência, estados vazio/erro/stale e exportações (NV-011).
+
+- [ADR-0008](adr/ADR-0008-react-synthetic-research-ui.md): fronteira de dados, build reproduzível e justificativa da primeira interface.
+
+- [API FastAPI de laboratório](demo-api.md): endpoints v1 de cenários fictícios, contratos e controles locais (NV-014).
+- [ADR-0009](adr/ADR-0009-versioned-synthetic-demo-api.md): decisão de FastAPI, validações e limites de segurança.
+
 - [Política RBAC por tenant](authorization.md): Viewer, Analyst, Owner e autorização fail-closed, ainda sem login (NV-016 recorte 1).
 - [ADR-0010](adr/ADR-0010-tenant-rbac-policy.md): matrizes de permissões, fronteiras e direitos de dados.
