@@ -14,7 +14,7 @@ def local_build(tmp_path):
     dist = tmp_path / "dist"
     (dist / "assets").mkdir(parents=True)
     (dist / "index.html").write_text(
-        '<!doctype html><html><head><title>Novera Lab</title></head>'
+        "<!doctype html><html><head><title>Novera Lab</title></head>"
         '<body><div id="root"></div><script src="/assets/app.js"></script></body></html>',
         encoding="utf-8",
     )
@@ -49,9 +49,7 @@ def test_api_does_not_fall_through_to_html_on_invalid_scenario(client):
     assert missing.status_code == 404
     assert "text/html" not in missing.headers["content-type"]
     assert "Novera Lab" not in missing.text
-    assert client.get("/api/v1/demo/comparison").json() == comparison_json(
-        compare_scenarios()
-    )
+    assert client.get("/api/v1/demo/comparison").json() == comparison_json(compare_scenarios())
 
 
 def test_both_web_and_api_are_noncacheable_and_have_same_origin_csp(client):
