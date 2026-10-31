@@ -34,9 +34,7 @@ def default_frontend_directory() -> Path:
 def create_local_app(*, frontend_directory: Path | None = None) -> FastAPI:
     """Factory for local static assets + API. Do not mount untrusted directories."""
     directory = (
-        default_frontend_directory()
-        if frontend_directory is None
-        else Path(frontend_directory)
+        default_frontend_directory() if frontend_directory is None else Path(frontend_directory)
     )
     if not directory.is_absolute() or not (directory / "index.html").is_file():
         raise RuntimeError(
