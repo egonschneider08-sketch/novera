@@ -269,7 +269,7 @@ function Placeholder({ mode }: { mode: "empty" | "error" }) {
   );
 }
 
-export function App({ data = fixture }: { data?: unknown }) {
+export function App({ data = fixture, enableCsvExport = true }: { data?: unknown; enableCsvExport?: boolean }) {
   const parsed = useMemo(() => parseComparison(data), [data]);
   const [scenario, setScenario] = useState("complete");
   const [method, setMethod] = useState<Method>("graham");
@@ -412,9 +412,10 @@ export function App({ data = fixture }: { data?: unknown }) {
                     onClick={() => download(`novera-${report.scenario}-ficticio.json`, JSON.stringify(report, null, 2), "application/json;charset=utf-8")}>
                     ↓ JSON do ativo
                   </button>
-                  <button type="button" disabled={isStale} className="primary-button"
+                  <button type="button" disabled={isStale || !enableCsvExport} className="primary-button"
+                    title={enableCsvExport ? "Exportação de cenários fictícios gerados pelo Python" : "CSV incorporado desativado enquanto a API é a origem dos dados"}
                     onClick={() => download("novera-cenarios-ficticios.csv", comparisonCsv, "text/csv;charset=utf-8")}>
-                    ↓ CSV dos cenários
+                    ↓ {enableCsvExport ? "CSV dos cenários" : "CSV apenas no snapshot"}
                   </button>
                 </div>
               </section>
