@@ -36,8 +36,6 @@ jobs:
         run: uv sync --locked --group dev
       - name: Lint
         run: uv run --offline --locked ruff check .
-      - name: Temporary exact formatter diff
-        run: uv run --offline --locked ruff format --diff backend/src/novera/local_lab.py backend/tests/test_local_lab.py scripts/check_local_lab_build.py || true
       - name: Format
         run: uv run --offline --locked ruff format --check .
       - name: Tests (no provider credentials)
