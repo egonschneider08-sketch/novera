@@ -4,7 +4,6 @@ import socket
 
 import pytest
 from fastapi.testclient import TestClient
-
 from novera.local_lab import CSP, create_local_app
 from novera.research_compare import compare_scenarios, comparison_json
 from novera.research_demo import report_json, run_scenario
