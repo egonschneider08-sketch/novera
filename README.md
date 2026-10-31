@@ -5,8 +5,9 @@ O backend inclui contratos e heuristicas puras Bazin/Graham, cliente HTTP,
 adaptadores de brapi/BCB, armazenamento SQLite e pipeline de ingestao controlada.
 Uma primeira jornada de pesquisa **totalmente sintetica e offline** pode ser
 executada no terminal. O projeto agora inclui um frontend React/TypeScript **apenas para cenarios
-ficticios**, mas nao fornece API, login ou servico comercial com cotacoes
-reais, recomendacoes ou metodologias validadas em mercado.
+ficticios**, com **API FastAPI local** e um servidor integrado em
+`127.0.0.1`; nao fornece login ou servico comercial com cotacoes reais,
+recomendacoes ou metodologias validadas em mercado.
 A versao `0.1.0` identifica somente o pacote inicial; nao representa uma
 release do produto nem validacao para uso em producao.
 
@@ -15,7 +16,7 @@ release do produto nem validacao para uso em producao.
 - Git e Python **3.12** (validado com 3.12.10).
 - uv **0.11.27**, versao usada na validacao. Instalacao: https://docs.astral.sh/uv/getting-started/installation/
 - Rede para o clone e a primeira instalacao de dependencias publicas.
-- Nenhuma credencial de fornecedor, banco de dados ou Node.js e necessario.
+- Para Python/CLI, Node.js nao e necessario; para a interface React, requer Node.js >= 22.12 e npm. Nenhuma credencial de fornecedor ou banco real e necessaria.
 
 ## Clone e ambiente
 
@@ -129,6 +130,25 @@ financeiros reais permanece negado mesmo para Owner.
 não emite sessões e não permite acesso real por usuários. O tipo Principal
 só poderá ser criado por uma camada de identidade confiável, após validação
 no servidor. Consulte [guia de autorização](docs/authorization.md).
+
+## Novera Lab full stack no Windows — NV-025
+
+A interface React e a API FastAPI agora podem rodar **juntas**, no
+mesmo endereço local. Em PowerShell, depois de atualizar o checkout:
+
+```powershell
+.\scripts\start-local-lab.cmd
+```
+
+Ou instale o frontend e inicie manualmente com
+`uv run --offline --locked python -m novera.local_lab`. Depois abra
+**http://127.0.0.1:8765/** e selecione **API local** para solicitar
+dados sintéticos através de HTTP. Não confundir com dados de mercado.
+
+Leia [guia full stack para Windows](docs/local-lab.md) para clonar/atualizar
+a branch correta, testar, configurar e entender as limitações de segurança.
+**Nunca exponha essa API na internet**, pois cadastro/login e isolamento de
+clientes ainda não estão implementados.
 
 ## Estrutura
 

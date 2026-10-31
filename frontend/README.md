@@ -3,7 +3,7 @@
 React + TypeScript + Vite. Primeira interface responsiva para analisar
 **exclusivamente três cenários fictícios**: LAB-A (PASS), LAB-B (FAIL)
 e LAB-C (UNKNOWN). Não é uma plataforma de mercado em tempo real,
-não requer senha ou API e não gera recomendação de investimento.
+não requer senha ou fontes de mercado e não gera recomendação de investimento.
 
 ## Executar na sua máquina
 
@@ -22,7 +22,37 @@ npm run dev
 
 Abra o endereço local apresentado pelo Vite. As dependências são instaladas
 uma vez; depois disso, o aplicativo usa apenas os arquivos estáticos do build.
-Não há requisição a cotação, dados de terceiros nem backend HTTP.
+O modo incorporado não faz requisição HTTP; o modo API local requer o servidor integrado de desenvolvimento e não consulta fontes reais.
+
+## Executar UI + API em um único endereço (NV-025)
+
+A maneira recomendada de avaliar a jornada completa é compilar o frontend
+e usar o FastAPI como servidor de arquivos locais **e** das rotas
+`/api/v1/demo/*` em uma mesma origem. A página terá um seletor
+**Dados incorporados** / **API local**; no segundo modo, o navegador chama
+a API em `/api/v1/demo/comparison`, valida a resposta e apresenta erro
+explícito quando o servidor não retorna dados sintéticos válidos.
+
+```powershell
+# Partindo da raiz do repositório:
+.\scripts\start-local-lab.cmd
+```
+
+Abra http://127.0.0.1:8765/. Também é possível compilar com
+`cd frontend; npm ci --ignore-scripts; npm run build; cd ..`
+e iniciar `uv run --offline --locked python -m novera.local_lab`.
+
+No modo API local o CSV incorporado fica desabilitado para não
+apresentar um snapshot como se fosse exportação HTTP. O CSV do servidor
+está em `/api/v1/demo/comparison.csv`. O fallback offline é sempre
+uma escolha explícita do usuário.
+
+Para apenas editar CSS/React, `npm run dev` continua funcionando,
+mas **sem proxy para a API**. A integração foi feita para servidor
+single-origin em `127.0.0.1:8765`; em Vite puro, selecionar API
+local exibe indisponibilidade em vez de fabricar valores.
+
+Consulte [guia do servidor integrado](../docs/local-lab.md).
 
 ## Testes e build
 

@@ -1,11 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App";
+import LabApp from "./LabApp";
 
 const root = document.getElementById("root");
 if (!root) throw new Error("Novera: elemento raiz não encontrado.");
 ReactDOM.createRoot(root).render(
   <React.StrictMode>
-    <App />
+    <LabApp />
   </React.StrictMode>,
 );
