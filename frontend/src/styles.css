@@ -371,3 +371,72 @@ td { color: #61797e; }
   html { scroll-behavior: auto; }
   *, *::before, *::after { transition: none !important; animation: none !important; }
 }
+
+/* Explicit local-API mode; offline snapshot is always distinguishable. */
+.source-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding: 11px clamp(16px, 3vw, 55px);
+  border-bottom: 1px solid #dbe6e2;
+  background: #ecf5f0;
+  color: #245447;
+  font-size: 11px;
+}
+.source-description { display: flex; flex-direction: column; gap: 3px; }
+.source-description strong { font-weight: 780; }
+.source-description span { color: #58746d; }
+.source-options {
+  display: flex;
+  gap: 4px;
+  padding: 4px;
+  background: #dfeee6;
+  border-radius: 9px;
+}
+.source-options button {
+  padding: 9px 13px;
+  border-radius: 7px;
+  border: 0;
+  font-size: 11px;
+  font-weight: 720;
+  background: transparent;
+  color: #527167;
+}
+.source-options button.source-selected {
+  background: #fff;
+  color: #176b52;
+  box-shadow: 0 1px 4px rgba(18, 58, 38, .1);
+}
+.source-status { color: #147357; font-size: 10px; font-weight: 780; }
+.source-feedback {
+  min-height: 68vh;
+  padding: 90px 20px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  flex-direction: column;
+  gap: 17px;
+  color: #18343d;
+}
+.source-feedback h1 { margin: 0; font-size: clamp(23px, 3vw, 34px); }
+.source-feedback p { margin: 0; max-width: 610px; line-height: 1.65; color: #617d7d; }
+.source-feedback .source-warning { color: #147357; font-size: 11px; font-weight: 800; }
+.source-recovery { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+.source-recovery button {
+  border: 1px solid #2b846a;
+  background: #fff;
+  color: #14634c;
+  border-radius: 8px;
+  padding: 12px 17px;
+  font-weight: 780;
+  font-size: 12px;
+}
+.source-recovery button:hover { background: #e8f4ed; }
+@media(max-width:760px) {
+  .source-bar { align-items: start; flex-direction: column; }
+  .source-options { width: 100%; }
+  .source-options button { flex: 1; }
+}
