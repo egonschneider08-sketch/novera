@@ -1,0 +1,1302 @@
+{
+  "disclaimer": "DADOS 100% FICTÍCIOS. Não representam ativos, empresas, cotações ou rendimentos reais. Resultados didáticos não são recomendação de investimento.",
+  "ordering": "user_selection_not_investment_ranking",
+  "reports": [
+    {
+      "as_of": "2026-10-28T23:00:00+00:00",
+      "asset": {
+        "identifier": "LAB-A",
+        "namespace": "novera.demo"
+      },
+      "disclaimer": "DADOS 100% FICTÍCIOS. Não representam ativos, empresas, cotações ou rendimentos reais. Resultados didáticos não são recomendação de investimento.",
+      "dividend_coverage_certified_by_fixture": true,
+      "label": "Laboratório Aurora — exemplo favorável",
+      "observations": [
+        {
+          "collected_at": "2026-10-28T22:50:00+00:00",
+          "content_id": "e6ff861e3f1a4d59ef1e58f6f5e16e6c448776a0e55c6ad297dcd4d391997afa",
+          "currency": "BRL",
+          "kind": "price",
+          "logical_id": "7fc9e1b4f9c03c734fdfeb15771869dd1cfabe4fdd8f95fb70d0d8fb29d9156f",
+          "metric": "close",
+          "publication_unknown_reason": null,
+          "published_at": "2026-10-28T22:40:00+00:00",
+          "quality": "present",
+          "reason": null,
+          "receipt_id": "08c2468c6bc578e463d2bde14cade4866a15841a251feed3ba4a850bd2bc797c",
+          "record_key": "close:2026-10-28",
+          "reference_period": {
+            "end": "2026-10-28",
+            "start": "2026-10-28"
+          },
+          "source": {
+            "provider": "novera-synthetic-fixture",
+            "reference": "https://example.invalid/novera/research/demo-v1",
+            "rule_version": "novera-synthetic-research-v1",
+            "synthetic": true
+          },
+          "unit": "currency/share",
+          "value": "8",
+          "version": 1
+        },
+        {
+          "collected_at": "2026-10-28T22:50:00+00:00",
+          "content_id": "a225434b22f2a46fa9b84b9457fac4158503a701b9cc4bf904740fd787aaa826",
+          "currency": "BRL",
+          "kind": "indicator",
+          "logical_id": "30c6490357afb012b7a4831d21829eed72a25c686c2459ed7ad55b785358ff68",
+          "metric": "earnings_per_share",
+          "publication_unknown_reason": null,
+          "published_at": "2026-03-15T16:00:00+00:00",
+          "quality": "present",
+          "reason": null,
+          "receipt_id": "f69cd8b3603083c76644a3b7abcab9fa877fcb81233f2c964225e46634c5b6dc",
+          "record_key": "eps:2025",
+          "reference_period": {
+            "end": "2025-12-31",
+            "start": "2025-01-01"
+          },
+          "source": {
+            "provider": "novera-synthetic-fixture",
+            "reference": "https://example.invalid/novera/research/demo-v1",
+            "rule_version": "novera-synthetic-research-v1",
+            "synthetic": true
+          },
+          "unit": "currency/share",
+          "value": "2",
+          "version": 1
+        },
+        {
+          "collected_at": "2026-10-28T22:50:00+00:00",
+          "content_id": "2ce9225599b0395af969b238d23afa244390476b545d18fe543401a3620b58b9",
+          "currency": "BRL",
+          "kind": "indicator",
+          "logical_id": "079690aa61f5e8da79473ea93c502852c6e1823137f2bd8fd8908182309ddac3",
+          "metric": "book_value_per_share",
+          "publication_unknown_reason": null,
+          "published_at": "2026-03-15T16:00:00+00:00",
+          "quality": "present",
+          "reason": null,
+          "receipt_id": "330b765cdd4555de37f9955f9520f5c0468b9a41895c4049843219d88ffdba1a",
+          "record_key": "bvps:2025",
+          "reference_period": {
+            "end": "2025-12-31",
+            "start": "2025-12-31"
+          },
+          "source": {
+            "provider": "novera-synthetic-fixture",
+            "reference": "https://example.invalid/novera/research/demo-v1",
+            "rule_version": "novera-synthetic-research-v1",
+            "synthetic": true
+          },
+          "unit": "currency/share",
+          "value": "20",
+          "version": 1
+        },
+        {
+          "collected_at": "2026-10-28T22:50:00+00:00",
+          "content_id": "d1b758cbc884b80b37ae44fe792d0b371506816e54752a254f48320253da3ed1",
+          "currency": "BRL",
+          "kind": "distribution",
+          "logical_id": "1a4785a5e0ab00ef4952317642769481b33da6702f2c4681fa717f259f51e59b",
+          "metric": "cash_distribution",
+          "publication_unknown_reason": null,
+          "published_at": "2024-05-01T12:00:00+00:00",
+          "quality": "present",
+          "reason": null,
+          "receipt_id": "2668e2bf4eddb1447ea948bb004601c59421f683170da06ede338ec6a4d56ae0",
+          "record_key": "cash-payment-2",
+          "reference_period": {
+            "end": "2024-05-01",
+            "start": "2024-05-01"
+          },
+          "source": {
+            "provider": "novera-synthetic-fixture",
+            "reference": "https://example.invalid/novera/research/demo-v1",
+            "rule_version": "novera-synthetic-research-v1",
+            "synthetic": true
+          },
+          "unit": "currency/share",
+          "value": "0.6",
+          "version": 1
+        },
+        {
+          "collected_at": "2026-10-28T22:50:00+00:00",
+          "content_id": "853902bef2cb26ce1dc2426314ed0a1db03a9d3e9acc2dcec6bd7bf8dae3959d",
+          "currency": "BRL",
+          "kind": "distribution",
+          "logical_id": "633e5e0e1d45cfe2e9f2cf6ae5a83e2ce3d92d6aeb626bbf1b267d860fea8166",
+          "metric": "cash_distribution",
+          "publication_unknown_reason": null,
+          "published_at": "2026-05-01T12:00:00+00:00",
+          "quality": "present",
+          "reason": null,
+          "receipt_id": "1c96d26c7ad8efae269d955114d3e5e464e8ce38d8759ec29ed507fb3d667eff",
+          "record_key": "cash-payment-0",
+          "reference_period": {
+            "end": "2026-05-01",
+            "start": "2026-05-01"
+          },
+          "source": {
+            "provider": "novera-synthetic-fixture",
+            "reference": "https://example.invalid/novera/research/demo-v1",
+            "rule_version": "novera-synthetic-research-v1",
+            "synthetic": true
+          },
+          "unit": "currency/share",
+          "value": "0.6",
+          "version": 1
+        },
+        {
+          "collected_at": "2026-10-28T22:50:00+00:00",
+          "content_id": "94ca2ca6f0f3aa0cf2d2d6fd5154816263c30cbb6026d383ba758dd2927eaf08",
+          "currency": "BRL",
+          "kind": "distribution",
+          "logical_id": "9831a9cceb30a0b3b22d4456e3a6502a882e971959f52341b85e4374238f7d0e",
+          "metric": "cash_distribution",
+          "publication_unknown_reason": null,
+          "published_at": "2022-05-02T12:00:00+00:00",
+          "quality": "present",
+          "reason": null,
+          "receipt_id": "7cb31a4eb81ba6ff6f16e023a35b5ed45c66b94555fca8ec15d94a43eb73a0ba",
+          "record_key": "cash-payment-4",
+          "reference_period": {
+            "end": "2022-05-02",
+            "start": "2022-05-02"
+          },
+          "source": {
+            "provider": "novera-synthetic-fixture",
+            "reference": "https://example.invalid/novera/research/demo-v1",
+            "rule_version": "novera-synthetic-research-v1",
+            "synthetic": true
+          },
+          "unit": "currency/share",
+          "value": "0.6",
+          "version": 1
+        },
+        {
+          "collected_at": "2026-10-28T22:50:00+00:00",
+          "content_id": "f6aef51860d9fa4db91ed464c552e7174fae856c7d17600dd6cafeeffd6ee705",
+          "currency": "BRL",
+          "kind": "distribution",
+          "logical_id": "cbd61f3da5c0557f9739635173a90a566d85580340345021ae86072e7d3c0eb7",
+          "metric": "cash_distribution",
+          "publication_unknown_reason": null,
+          "published_at": "2025-05-01T12:00:00+00:00",
+          "quality": "present",
+          "reason": null,
+          "receipt_id": "2f33e9518900e3735d23fd3e01f57e76580e377522998b4beb714a7cdde3b449",
+          "record_key": "cash-payment-1",
+          "reference_period": {
+            "end": "2025-05-01",
+            "start": "2025-05-01"
+          },
+          "source": {
+            "provider": "novera-synthetic-fixture",
+            "reference": "https://example.invalid/novera/research/demo-v1",
+            "rule_version": "novera-synthetic-research-v1",
+            "synthetic": true
+          },
+          "unit": "currency/share",
+          "value": "0.6",
+          "version": 1
+        },
+        {
+          "collected_at": "2026-10-28T22:50:00+00:00",
+          "content_id": "ab961d9a53e0ddfe4ac1716bca5ae72b6267b61378bc2e43235dd17a26773fca",
+          "currency": "BRL",
+          "kind": "distribution",
+          "logical_id": "e8edb10aad9582033dafde40601354b166acb4d6edbdee11f13331a3b3511545",
+          "metric": "cash_distribution",
+          "publication_unknown_reason": null,
+          "published_at": "2023-05-02T12:00:00+00:00",
+          "quality": "present",
+          "reason": null,
+          "receipt_id": "4e8fc930f198e346bd112a35fdea86834dc31e258f2e27677a101b22680c54e7",
+          "record_key": "cash-payment-3",
+          "reference_period": {
+            "end": "2023-05-02",
+            "start": "2023-05-02"
+          },
+          "source": {
+            "provider": "novera-synthetic-fixture",
+            "reference": "https://example.invalid/novera/research/demo-v1",
+            "rule_version": "novera-synthetic-research-v1",
+            "synthetic": true
+          },
+          "unit": "currency/share",
+          "value": "0.6",
+          "version": 1
+        }
+      ],
+      "scenario": "complete",
+      "schema": "novera-synthetic-research-v1",
+      "share_basis": "unadjusted",
+      "strategies": [
+        {
+          "as_of": "2026-10-28T23:00:00+00:00",
+          "coverage": null,
+          "criteria": [
+            {
+              "name": "positive_earnings",
+              "reason": "EPS must be positive",
+              "state": "pass"
+            },
+            {
+              "name": "pe_at_most_15",
+              "reason": "derived price/EPS <= 15",
+              "state": "pass"
+            },
+            {
+              "name": "pb_at_most_1_5",
+              "reason": "derived price/BVPS <= 1.5",
+              "state": "pass"
+            },
+            {
+              "name": "pe_times_pb_at_most_22_5",
+              "reason": "derived multiple product <= 22.5",
+              "state": "pass"
+            },
+            {
+              "name": "price_at_most_graham_number",
+              "reason": "price compared with educational heuristic",
+              "state": "pass"
+            }
+          ],
+          "methodology": "graham-number-partial",
+          "metrics": [
+            {
+              "currency": "BRL",
+              "name": "graham_number",
+              "period": {
+                "end": "2026-10-28",
+                "start": "2026-10-28"
+              },
+              "quality": "present",
+              "reason": "calculated from traced inputs",
+              "unit": "currency/share",
+              "value": "30.0"
+            },
+            {
+              "currency": null,
+              "name": "pe",
+              "period": {
+                "end": "2026-10-28",
+                "start": "2026-10-28"
+              },
+              "quality": "present",
+              "reason": "calculated from traced inputs",
+              "unit": "ratio",
+              "value": "4"
+            },
+            {
+              "currency": null,
+              "name": "pb",
+              "period": {
+                "end": "2026-10-28",
+                "start": "2026-10-28"
+              },
+              "quality": "present",
+              "reason": "calculated from traced inputs",
+              "unit": "ratio",
+              "value": "0.4"
+            },
+            {
+              "currency": null,
+              "name": "margin",
+              "period": {
+                "end": "2026-10-28",
+                "start": "2026-10-28"
+              },
+              "quality": "present",
+              "reason": "calculated from traced inputs",
+              "unit": "ratio",
+              "value": "2.75"
+            }
+          ],
+          "rule_version": "graham-number-v1",
+          "state": "pass",
+          "synthetic": true
+        },
+        {
+          "as_of": "2026-10-28T23:00:00+00:00",
+          "coverage": {
+            "collected_at": "2026-10-28T22:50:00+00:00",
+            "complete_by_fixture": true,
+            "end": "2026-10-28",
+            "published_at": "2026-10-28T22:40:00+00:00",
+            "source": "novera-synthetic-fixture",
+            "start": "2021-10-30",
+            "synthetic": true
+          },
+          "criteria": [
+            {
+              "name": "price_at_most_ceiling",
+              "reason": "price compared with educational ceiling",
+              "state": "pass"
+            },
+            {
+              "name": "yield_at_least_target",
+              "reason": "target yield 0.06",
+              "state": "pass"
+            },
+            {
+              "name": "paid_in_all_five_windows",
+              "reason": "certified coverage distinguishes zero from missing payments",
+              "state": "pass"
+            },
+            {
+              "name": "latest_window_not_below_oldest",
+              "reason": "endpoint comparison only, not monotonic growth",
+              "state": "pass"
+            }
+          ],
+          "methodology": "bazin-five-365-day-windows",
+          "metrics": [
+            {
+              "currency": "BRL",
+              "name": "annual_average",
+              "period": {
+                "end": "2026-10-28",
+                "start": "2021-10-30"
+              },
+              "quality": "present",
+              "reason": "calculated from certified coverage",
+              "unit": "currency/share",
+              "value": "0.6"
+            },
+            {
+              "currency": "BRL",
+              "name": "bazin_ceiling",
+              "period": {
+                "end": "2026-10-28",
+                "start": "2021-10-30"
+              },
+              "quality": "present",
+              "reason": "calculated from certified coverage",
+              "unit": "currency/share",
+              "value": "1E+1"
+            },
+            {
+              "currency": null,
+              "name": "yield_365d",
+              "period": {
+                "end": "2026-10-28",
+                "start": "2021-10-30"
+              },
+              "quality": "present",
+              "reason": "calculated from certified coverage",
+              "unit": "ratio",
+              "value": "0.075"
+            },
+            {
+              "currency": null,
+              "name": "margin",
+              "period": {
+                "end": "2026-10-28",
+                "start": "2021-10-30"
+              },
+              "quality": "present",
+              "reason": "calculated from certified coverage",
+              "unit": "ratio",
+              "value": "0.25"
+            },
+            {
+              "currency": "BRL",
+              "name": "window_0",
+              "period": {
+                "end": "2026-10-28",
+                "start": "2025-10-29"
+              },
+              "quality": "present",
+              "reason": "realized cash; excluded future events: 0",
+              "unit": "currency/share",
+              "value": "0.6"
+            },
+            {
+              "currency": "BRL",
+              "name": "window_1",
+              "period": {
+                "end": "2025-10-28",
+                "start": "2024-10-29"
+              },
+              "quality": "present",
+              "reason": "realized cash; excluded future events: 0",
+              "unit": "currency/share",
+              "value": "0.6"
+            },
+            {
+              "currency": "BRL",
+              "name": "window_2",
+              "period": {
+                "end": "2024-10-28",
+                "start": "2023-10-30"
+              },
+              "quality": "present",
+              "reason": "realized cash; excluded future events: 0",
+              "unit": "currency/share",
+              "value": "0.6"
+            },
+            {
+              "currency": "BRL",
+              "name": "window_3",
+              "period": {
+                "end": "2023-10-29",
+                "start": "2022-10-30"
+              },
+              "quality": "present",
+              "reason": "realized cash; excluded future events: 0",
+              "unit": "currency/share",
+              "value": "0.6"
+            },
+            {
+              "currency": "BRL",
+              "name": "window_4",
+              "period": {
+                "end": "2022-10-29",
+                "start": "2021-10-30"
+              },
+              "quality": "present",
+              "reason": "realized cash; excluded future events: 0",
+              "unit": "currency/share",
+              "value": "0.6"
+            }
+          ],
+          "rule_version": "bazin-cash-v1",
+          "state": "pass",
+          "synthetic": true
+        }
+      ],
+      "synthetic": true
+    },
+    {
+      "as_of": "2026-10-28T23:00:00+00:00",
+      "asset": {
+        "identifier": "LAB-B",
+        "namespace": "novera.demo"
+      },
+      "disclaimer": "DADOS 100% FICTÍCIOS. Não representam ativos, empresas, cotações ou rendimentos reais. Resultados didáticos não são recomendação de investimento.",
+      "dividend_coverage_certified_by_fixture": true,
+      "label": "Laboratório Horizonte — preço elevado",
+      "observations": [
+        {
+          "collected_at": "2026-10-28T22:50:00+00:00",
+          "content_id": "3fc2952b19f10c5dadcb2d51e2cf2c3b8ca23d934333e72eb641408a481821a9",
+          "currency": "BRL",
+          "kind": "price",
+          "logical_id": "c59812e42ab276ccc1e3afba5fbfd9d326bbf0233e4a8305af19dd72c9b72d33",
+          "metric": "close",
+          "publication_unknown_reason": null,
+          "published_at": "2026-10-28T22:40:00+00:00",
+          "quality": "present",
+          "reason": null,
+          "receipt_id": "c99494a6e1f9dc504ed5c7b7e30d3199b4b7cfb068dd521475c761625ebbe841",
+          "record_key": "close:2026-10-28",
+          "reference_period": {
+            "end": "2026-10-28",
+            "start": "2026-10-28"
+          },
+          "source": {
+            "provider": "novera-synthetic-fixture",
+            "reference": "https://example.invalid/novera/research/demo-v1",
+            "rule_version": "novera-synthetic-research-v1",
+            "synthetic": true
+          },
+          "unit": "currency/share",
+          "value": "35",
+          "version": 1
+        },
+        {
+          "collected_at": "2026-10-28T22:50:00+00:00",
+          "content_id": "38cc2c781628eadc2c27ba94078adac1652d1559a0b49711925568f1c1b2cc1e",
+          "currency": "BRL",
+          "kind": "indicator",
+          "logical_id": "5dec27da9c2a92dc2c5d49e53b2bf1d52e450321c3d8a2960e2eee85357ac058",
+          "metric": "earnings_per_share",
+          "publication_unknown_reason": null,
+          "published_at": "2026-03-15T16:00:00+00:00",
+          "quality": "present",
+          "reason": null,
+          "receipt_id": "264adc969880293598d26829575d2519f1cca6d8f5e37ff14d07e956e1123090",
+          "record_key": "eps:2025",
+          "reference_period": {
+            "end": "2025-12-31",
+            "start": "2025-01-01"
+          },
+          "source": {
+            "provider": "novera-synthetic-fixture",
+            "reference": "https://example.invalid/novera/research/demo-v1",
+            "rule_version": "novera-synthetic-research-v1",
+            "synthetic": true
+          },
+          "unit": "currency/share",
+          "value": "2",
+          "version": 1
+        },
+        {
+          "collected_at": "2026-10-28T22:50:00+00:00",
+          "content_id": "40b9c65c8570259cd1212723bb223c911fab75e59471a657decff7bd08267f5a",
+          "currency": "BRL",
+          "kind": "indicator",
+          "logical_id": "7300ed4ca4b88d7b0190aa3650bb46ff1c83b04ba8cfaeccfe092ba46d002478",
+          "metric": "book_value_per_share",
+          "publication_unknown_reason": null,
+          "published_at": "2026-03-15T16:00:00+00:00",
+          "quality": "present",
+          "reason": null,
+          "receipt_id": "b0d1c10217bc55ac88f984459a279b25eab0fa8eb56bd658424b84971c78960d",
+          "record_key": "bvps:2025",
+          "reference_period": {
+            "end": "2025-12-31",
+            "start": "2025-12-31"
+          },
+          "source": {
+            "provider": "novera-synthetic-fixture",
+            "reference": "https://example.invalid/novera/research/demo-v1",
+            "rule_version": "novera-synthetic-research-v1",
+            "synthetic": true
+          },
+          "unit": "currency/share",
+          "value": "20",
+          "version": 1
+        },
+        {
+          "collected_at": "2026-10-28T22:50:00+00:00",
+          "content_id": "23a65c3ad239abafb0b4c112d461da50d67758fbf4afef7477d58834850af109",
+          "currency": "BRL",
+          "kind": "distribution",
+          "logical_id": "3cdbb6eba36104e0973b9640172d3eb7151acf34430e1c061b31441df63ce5fb",
+          "metric": "cash_distribution",
+          "publication_unknown_reason": null,
+          "published_at": "2024-05-01T12:00:00+00:00",
+          "quality": "present",
+          "reason": null,
+          "receipt_id": "08e7a566e5ff5312e63df0551d8eeb00b17dc3944c681e3e9808c3bbf7670a11",
+          "record_key": "cash-payment-2",
+          "reference_period": {
+            "end": "2024-05-01",
+            "start": "2024-05-01"
+          },
+          "source": {
+            "provider": "novera-synthetic-fixture",
+            "reference": "https://example.invalid/novera/research/demo-v1",
+            "rule_version": "novera-synthetic-research-v1",
+            "synthetic": true
+          },
+          "unit": "currency/share",
+          "value": "0.6",
+          "version": 1
+        },
+        {
+          "collected_at": "2026-10-28T22:50:00+00:00",
+          "content_id": "419d0d9f261ab3a7dc558a202ec8150fd7912d704fbf6039803c5b8821913f98",
+          "currency": "BRL",
+          "kind": "distribution",
+          "logical_id": "625cbf5afd7288ac9c2acaf6b0b60f8e5502e8211c7c566f422b439706990968",
+          "metric": "cash_distribution",
+          "publication_unknown_reason": null,
+          "published_at": "2023-05-02T12:00:00+00:00",
+          "quality": "present",
+          "reason": null,
+          "receipt_id": "86a25d9f45e3912dc152a6f7540af9f402a1f0518da71a207e49ac50a0347c52",
+          "record_key": "cash-payment-3",
+          "reference_period": {
+            "end": "2023-05-02",
+            "start": "2023-05-02"
+          },
+          "source": {
+            "provider": "novera-synthetic-fixture",
+            "reference": "https://example.invalid/novera/research/demo-v1",
+            "rule_version": "novera-synthetic-research-v1",
+            "synthetic": true
+          },
+          "unit": "currency/share",
+          "value": "0.6",
+          "version": 1
+        },
+        {
+          "collected_at": "2026-10-28T22:50:00+00:00",
+          "content_id": "ab69c8c550031cb8d48b1e01ad3de9ee919238d8647163e29046f199e6ba60cf",
+          "currency": "BRL",
+          "kind": "distribution",
+          "logical_id": "ce4ccb135a7947a058f925c7748c9578a4c1db94b3858832d94461e1e037e1e7",
+          "metric": "cash_distribution",
+          "publication_unknown_reason": null,
+          "published_at": "2025-05-01T12:00:00+00:00",
+          "quality": "present",
+          "reason": null,
+          "receipt_id": "b364881e226ec0ea37089ac6c8015e5b2a955895614f8c24c888a1beec1633bc",
+          "record_key": "cash-payment-1",
+          "reference_period": {
+            "end": "2025-05-01",
+            "start": "2025-05-01"
+          },
+          "source": {
+            "provider": "novera-synthetic-fixture",
+            "reference": "https://example.invalid/novera/research/demo-v1",
+            "rule_version": "novera-synthetic-research-v1",
+            "synthetic": true
+          },
+          "unit": "currency/share",
+          "value": "0.6",
+          "version": 1
+        },
+        {
+          "collected_at": "2026-10-28T22:50:00+00:00",
+          "content_id": "3633ada42e22afee159f95bf579d0896d1ab56003d7a0ac9bb69c0f78fb0f8ff",
+          "currency": "BRL",
+          "kind": "distribution",
+          "logical_id": "d0163ead56ccf6a993f38aa8638624a7fb95b636483cd4da58542e8c7c5698a1",
+          "metric": "cash_distribution",
+          "publication_unknown_reason": null,
+          "published_at": "2022-05-02T12:00:00+00:00",
+          "quality": "present",
+          "reason": null,
+          "receipt_id": "de0b7fee5daa4a94d4384048e707857e3237a30c190cc227ea66bf1b0e4f298b",
+          "record_key": "cash-payment-4",
+          "reference_period": {
+            "end": "2022-05-02",
+            "start": "2022-05-02"
+          },
+          "source": {
+            "provider": "novera-synthetic-fixture",
+            "reference": "https://example.invalid/novera/research/demo-v1",
+            "rule_version": "novera-synthetic-research-v1",
+            "synthetic": true
+          },
+          "unit": "currency/share",
+          "value": "0.6",
+          "version": 1
+        },
+        {
+          "collected_at": "2026-10-28T22:50:00+00:00",
+          "content_id": "f6c33a10475e28188f516e2695b0af2fb4d18ce94e5b70d28d688dbf71a7748e",
+          "currency": "BRL",
+          "kind": "distribution",
+          "logical_id": "d4167c210a9143c6b02afc2c1a71797112d7408b9379de17a4e7047d1190818e",
+          "metric": "cash_distribution",
+          "publication_unknown_reason": null,
+          "published_at": "2026-05-01T12:00:00+00:00",
+          "quality": "present",
+          "reason": null,
+          "receipt_id": "21cb27bc9d4ba7e01c8343980afad5eddd6ecbbec62b6d34f664dcc7c64d0f12",
+          "record_key": "cash-payment-0",
+          "reference_period": {
+            "end": "2026-05-01",
+            "start": "2026-05-01"
+          },
+          "source": {
+            "provider": "novera-synthetic-fixture",
+            "reference": "https://example.invalid/novera/research/demo-v1",
+            "rule_version": "novera-synthetic-research-v1",
+            "synthetic": true
+          },
+          "unit": "currency/share",
+          "value": "0.6",
+          "version": 1
+        }
+      ],
+      "scenario": "expensive",
+      "schema": "novera-synthetic-research-v1",
+      "share_basis": "unadjusted",
+      "strategies": [
+        {
+          "as_of": "2026-10-28T23:00:00+00:00",
+          "coverage": null,
+          "criteria": [
+            {
+              "name": "positive_earnings",
+              "reason": "EPS must be positive",
+              "state": "pass"
+            },
+            {
+              "name": "pe_at_most_15",
+              "reason": "derived price/EPS <= 15",
+              "state": "fail"
+            },
+            {
+              "name": "pb_at_most_1_5",
+              "reason": "derived price/BVPS <= 1.5",
+              "state": "fail"
+            },
+            {
+              "name": "pe_times_pb_at_most_22_5",
+              "reason": "derived multiple product <= 22.5",
+              "state": "fail"
+            },
+            {
+              "name": "price_at_most_graham_number",
+              "reason": "price compared with educational heuristic",
+              "state": "fail"
+            }
+          ],
+          "methodology": "graham-number-partial",
+          "metrics": [
+            {
+              "currency": "BRL",
+              "name": "graham_number",
+              "period": {
+                "end": "2026-10-28",
+                "start": "2026-10-28"
+              },
+              "quality": "present",
+              "reason": "calculated from traced inputs",
+              "unit": "currency/share",
+              "value": "30.0"
+            },
+            {
+              "currency": null,
+              "name": "pe",
+              "period": {
+                "end": "2026-10-28",
+                "start": "2026-10-28"
+              },
+              "quality": "present",
+              "reason": "calculated from traced inputs",
+              "unit": "ratio",
+              "value": "17.5"
+            },
+            {
+              "currency": null,
+              "name": "pb",
+              "period": {
+                "end": "2026-10-28",
+                "start": "2026-10-28"
+              },
+              "quality": "present",
+              "reason": "calculated from traced inputs",
+              "unit": "ratio",
+              "value": "1.75"
+            },
+            {
+              "currency": null,
+              "name": "margin",
+              "period": {
+                "end": "2026-10-28",
+                "start": "2026-10-28"
+              },
+              "quality": "present",
+              "reason": "calculated from traced inputs",
+              "unit": "ratio",
+              "value": "-0.1428571428571428571428571428571429"
+            }
+          ],
+          "rule_version": "graham-number-v1",
+          "state": "fail",
+          "synthetic": true
+        },
+        {
+          "as_of": "2026-10-28T23:00:00+00:00",
+          "coverage": {
+            "collected_at": "2026-10-28T22:50:00+00:00",
+            "complete_by_fixture": true,
+            "end": "2026-10-28",
+            "published_at": "2026-10-28T22:40:00+00:00",
+            "source": "novera-synthetic-fixture",
+            "start": "2021-10-30",
+            "synthetic": true
+          },
+          "criteria": [
+            {
+              "name": "price_at_most_ceiling",
+              "reason": "price compared with educational ceiling",
+              "state": "fail"
+            },
+            {
+              "name": "yield_at_least_target",
+              "reason": "target yield 0.06",
+              "state": "fail"
+            },
+            {
+              "name": "paid_in_all_five_windows",
+              "reason": "certified coverage distinguishes zero from missing payments",
+              "state": "pass"
+            },
+            {
+              "name": "latest_window_not_below_oldest",
+              "reason": "endpoint comparison only, not monotonic growth",
+              "state": "pass"
+            }
+          ],
+          "methodology": "bazin-five-365-day-windows",
+          "metrics": [
+            {
+              "currency": "BRL",
+              "name": "annual_average",
+              "period": {
+                "end": "2026-10-28",
+                "start": "2021-10-30"
+              },
+              "quality": "present",
+              "reason": "calculated from certified coverage",
+              "unit": "currency/share",
+              "value": "0.6"
+            },
+            {
+              "currency": "BRL",
+              "name": "bazin_ceiling",
+              "period": {
+                "end": "2026-10-28",
+                "start": "2021-10-30"
+              },
+              "quality": "present",
+              "reason": "calculated from certified coverage",
+              "unit": "currency/share",
+              "value": "1E+1"
+            },
+            {
+              "currency": null,
+              "name": "yield_365d",
+              "period": {
+                "end": "2026-10-28",
+                "start": "2021-10-30"
+              },
+              "quality": "present",
+              "reason": "calculated from certified coverage",
+              "unit": "ratio",
+              "value": "0.01714285714285714285714285714285714"
+            },
+            {
+              "currency": null,
+              "name": "margin",
+              "period": {
+                "end": "2026-10-28",
+                "start": "2021-10-30"
+              },
+              "quality": "present",
+              "reason": "calculated from certified coverage",
+              "unit": "ratio",
+              "value": "-0.7142857142857142857142857142857143"
+            },
+            {
+              "currency": "BRL",
+              "name": "window_0",
+              "period": {
+                "end": "2026-10-28",
+                "start": "2025-10-29"
+              },
+              "quality": "present",
+              "reason": "realized cash; excluded future events: 0",
+              "unit": "currency/share",
+              "value": "0.6"
+            },
+            {
+              "currency": "BRL",
+              "name": "window_1",
+              "period": {
+                "end": "2025-10-28",
+                "start": "2024-10-29"
+              },
+              "quality": "present",
+              "reason": "realized cash; excluded future events: 0",
+              "unit": "currency/share",
+              "value": "0.6"
+            },
+            {
+              "currency": "BRL",
+              "name": "window_2",
+              "period": {
+                "end": "2024-10-28",
+                "start": "2023-10-30"
+              },
+              "quality": "present",
+              "reason": "realized cash; excluded future events: 0",
+              "unit": "currency/share",
+              "value": "0.6"
+            },
+            {
+              "currency": "BRL",
+              "name": "window_3",
+              "period": {
+                "end": "2023-10-29",
+                "start": "2022-10-30"
+              },
+              "quality": "present",
+              "reason": "realized cash; excluded future events: 0",
+              "unit": "currency/share",
+              "value": "0.6"
+            },
+            {
+              "currency": "BRL",
+              "name": "window_4",
+              "period": {
+                "end": "2022-10-29",
+                "start": "2021-10-30"
+              },
+              "quality": "present",
+              "reason": "realized cash; excluded future events: 0",
+              "unit": "currency/share",
+              "value": "0.6"
+            }
+          ],
+          "rule_version": "bazin-cash-v1",
+          "state": "fail",
+          "synthetic": true
+        }
+      ],
+      "synthetic": true
+    },
+    {
+      "as_of": "2026-10-28T23:00:00+00:00",
+      "asset": {
+        "identifier": "LAB-C",
+        "namespace": "novera.demo"
+      },
+      "disclaimer": "DADOS 100% FICTÍCIOS. Não representam ativos, empresas, cotações ou rendimentos reais. Resultados didáticos não são recomendação de investimento.",
+      "dividend_coverage_certified_by_fixture": false,
+      "label": "Laboratório Lacuna — dados insuficientes",
+      "observations": [
+        {
+          "collected_at": "2026-10-28T22:50:00+00:00",
+          "content_id": "6429adf606ab55607dc35adf964b3d27dc29f88f6fed1453152ea2eb5484ed06",
+          "currency": "BRL",
+          "kind": "price",
+          "logical_id": "aec4b8c36bd31c95a5e658604376cd91744a1db089e58fbbb3e7bdf922308ec7",
+          "metric": "close",
+          "publication_unknown_reason": null,
+          "published_at": "2026-10-28T22:40:00+00:00",
+          "quality": "present",
+          "reason": null,
+          "receipt_id": "ce307e72ec737044442bf569b55938ce1e1a6b1b684d2903a72a9792f6efa4f6",
+          "record_key": "close:2026-10-28",
+          "reference_period": {
+            "end": "2026-10-28",
+            "start": "2026-10-28"
+          },
+          "source": {
+            "provider": "novera-synthetic-fixture",
+            "reference": "https://example.invalid/novera/research/demo-v1",
+            "rule_version": "novera-synthetic-research-v1",
+            "synthetic": true
+          },
+          "unit": "currency/share",
+          "value": "8",
+          "version": 1
+        },
+        {
+          "collected_at": "2026-10-28T22:50:00+00:00",
+          "content_id": "0876436dd2d2404ba2e48ff76cb2430d94178beb766e0c04f85ea7535040ff40",
+          "currency": "BRL",
+          "kind": "indicator",
+          "logical_id": "eace745bee7cb374d09a7501b1d2576a10f39eb54e20e388e95524fefd45f64e",
+          "metric": "earnings_per_share",
+          "publication_unknown_reason": null,
+          "published_at": "2026-03-15T16:00:00+00:00",
+          "quality": "missing",
+          "reason": "fixture deliberately lacks annual EPS",
+          "receipt_id": "a744d4241b960e2e3b7e684e6accef020c420136933c05fa869e8facde995efe",
+          "record_key": "eps:2025",
+          "reference_period": {
+            "end": "2025-12-31",
+            "start": "2025-01-01"
+          },
+          "source": {
+            "provider": "novera-synthetic-fixture",
+            "reference": "https://example.invalid/novera/research/demo-v1",
+            "rule_version": "novera-synthetic-research-v1",
+            "synthetic": true
+          },
+          "unit": "currency/share",
+          "value": null,
+          "version": 1
+        },
+        {
+          "collected_at": "2026-10-28T22:50:00+00:00",
+          "content_id": "cd7da76fc94624ea6e8cc4a09d3d828b202de995e8f51018bd56888098e24d42",
+          "currency": "BRL",
+          "kind": "indicator",
+          "logical_id": "42db4e5944882c846654e512ee5dec9564956f96b584213e4b0260c3d1b4c872",
+          "metric": "book_value_per_share",
+          "publication_unknown_reason": null,
+          "published_at": "2026-03-15T16:00:00+00:00",
+          "quality": "present",
+          "reason": null,
+          "receipt_id": "2568a9f87135baf428a7aa060c81080a4f1fef99f63a92fb7056896da8ccfb54",
+          "record_key": "bvps:2025",
+          "reference_period": {
+            "end": "2025-12-31",
+            "start": "2025-12-31"
+          },
+          "source": {
+            "provider": "novera-synthetic-fixture",
+            "reference": "https://example.invalid/novera/research/demo-v1",
+            "rule_version": "novera-synthetic-research-v1",
+            "synthetic": true
+          },
+          "unit": "currency/share",
+          "value": "20",
+          "version": 1
+        },
+        {
+          "collected_at": "2026-10-28T22:50:00+00:00",
+          "content_id": "5ab1383929fcce09fc1e2ff96f603b6bfd627db5b7af7d749e23aaad0497e3d9",
+          "currency": "BRL",
+          "kind": "distribution",
+          "logical_id": "d32f5130c7aba0a05c7e8693f678751490dbb0e5703136a0b2bd6bb8f5120f61",
+          "metric": "cash_distribution",
+          "publication_unknown_reason": null,
+          "published_at": "2026-05-01T12:00:00+00:00",
+          "quality": "present",
+          "reason": null,
+          "receipt_id": "569f37bdaa40bb30cc56bd4afa64c7f5e5bbabfd44287d8c6eca370a1aa73407",
+          "record_key": "cash-payment-0",
+          "reference_period": {
+            "end": "2026-05-01",
+            "start": "2026-05-01"
+          },
+          "source": {
+            "provider": "novera-synthetic-fixture",
+            "reference": "https://example.invalid/novera/research/demo-v1",
+            "rule_version": "novera-synthetic-research-v1",
+            "synthetic": true
+          },
+          "unit": "currency/share",
+          "value": "0.6",
+          "version": 1
+        }
+      ],
+      "scenario": "incomplete",
+      "schema": "novera-synthetic-research-v1",
+      "share_basis": "unadjusted",
+      "strategies": [
+        {
+          "as_of": "2026-10-28T23:00:00+00:00",
+          "coverage": null,
+          "criteria": [
+            {
+              "name": "positive_earnings",
+              "reason": "input missing: fixture deliberately lacks annual EPS",
+              "state": "unknown"
+            },
+            {
+              "name": "pe_at_most_15",
+              "reason": "input missing: fixture deliberately lacks annual EPS",
+              "state": "unknown"
+            },
+            {
+              "name": "pb_at_most_1_5",
+              "reason": "derived price/BVPS <= 1.5",
+              "state": "pass"
+            },
+            {
+              "name": "pe_times_pb_at_most_22_5",
+              "reason": "input missing: fixture deliberately lacks annual EPS",
+              "state": "unknown"
+            },
+            {
+              "name": "price_at_most_graham_number",
+              "reason": "input missing: fixture deliberately lacks annual EPS",
+              "state": "unknown"
+            }
+          ],
+          "methodology": "graham-number-partial",
+          "metrics": [
+            {
+              "currency": "BRL",
+              "name": "graham_number",
+              "period": {
+                "end": "2026-10-28",
+                "start": "2026-10-28"
+              },
+              "quality": "missing",
+              "reason": "input missing: fixture deliberately lacks annual EPS",
+              "unit": "currency/share",
+              "value": null
+            },
+            {
+              "currency": null,
+              "name": "pe",
+              "period": {
+                "end": "2026-10-28",
+                "start": "2026-10-28"
+              },
+              "quality": "missing",
+              "reason": "input missing: fixture deliberately lacks annual EPS",
+              "unit": "ratio",
+              "value": null
+            },
+            {
+              "currency": null,
+              "name": "pb",
+              "period": {
+                "end": "2026-10-28",
+                "start": "2026-10-28"
+              },
+              "quality": "present",
+              "reason": "calculated from traced inputs",
+              "unit": "ratio",
+              "value": "0.4"
+            },
+            {
+              "currency": null,
+              "name": "margin",
+              "period": {
+                "end": "2026-10-28",
+                "start": "2026-10-28"
+              },
+              "quality": "missing",
+              "reason": "input missing: fixture deliberately lacks annual EPS",
+              "unit": "ratio",
+              "value": null
+            }
+          ],
+          "rule_version": "graham-number-v1",
+          "state": "unknown",
+          "synthetic": true
+        },
+        {
+          "as_of": "2026-10-28T23:00:00+00:00",
+          "coverage": {
+            "collected_at": "2026-10-28T22:50:00+00:00",
+            "complete_by_fixture": false,
+            "end": "2026-10-28",
+            "published_at": "2026-10-28T22:40:00+00:00",
+            "source": "novera-synthetic-fixture",
+            "start": "2025-10-29",
+            "synthetic": true
+          },
+          "criteria": [
+            {
+              "name": "price_at_most_ceiling",
+              "reason": "full five-window history coverage is not certified",
+              "state": "unknown"
+            },
+            {
+              "name": "yield_at_least_target",
+              "reason": "full five-window history coverage is not certified",
+              "state": "unknown"
+            },
+            {
+              "name": "paid_in_all_five_windows",
+              "reason": "full five-window history coverage is not certified",
+              "state": "unknown"
+            },
+            {
+              "name": "latest_window_not_below_oldest",
+              "reason": "full five-window history coverage is not certified",
+              "state": "unknown"
+            }
+          ],
+          "methodology": "bazin-five-365-day-windows",
+          "metrics": [
+            {
+              "currency": "BRL",
+              "name": "annual_average",
+              "period": {
+                "end": "2026-10-28",
+                "start": "2021-10-30"
+              },
+              "quality": "missing",
+              "reason": "full five-window history coverage is not certified",
+              "unit": "currency/share",
+              "value": null
+            },
+            {
+              "currency": "BRL",
+              "name": "bazin_ceiling",
+              "period": {
+                "end": "2026-10-28",
+                "start": "2021-10-30"
+              },
+              "quality": "missing",
+              "reason": "full five-window history coverage is not certified",
+              "unit": "currency/share",
+              "value": null
+            },
+            {
+              "currency": null,
+              "name": "yield_365d",
+              "period": {
+                "end": "2026-10-28",
+                "start": "2021-10-30"
+              },
+              "quality": "missing",
+              "reason": "full five-window history coverage is not certified",
+              "unit": "ratio",
+              "value": null
+            },
+            {
+              "currency": null,
+              "name": "margin",
+              "period": {
+                "end": "2026-10-28",
+                "start": "2021-10-30"
+              },
+              "quality": "missing",
+              "reason": "full five-window history coverage is not certified",
+              "unit": "ratio",
+              "value": null
+            },
+            {
+              "currency": "BRL",
+              "name": "window_0",
+              "period": {
+                "end": "2026-10-28",
+                "start": "2025-10-29"
+              },
+              "quality": "missing",
+              "reason": "full five-window history coverage is not certified",
+              "unit": "currency/share",
+              "value": null
+            },
+            {
+              "currency": "BRL",
+              "name": "window_1",
+              "period": {
+                "end": "2025-10-28",
+                "start": "2024-10-29"
+              },
+              "quality": "missing",
+              "reason": "full five-window history coverage is not certified",
+              "unit": "currency/share",
+              "value": null
+            },
+            {
+              "currency": "BRL",
+              "name": "window_2",
+              "period": {
+                "end": "2024-10-28",
+                "start": "2023-10-30"
+              },
+              "quality": "missing",
+              "reason": "full five-window history coverage is not certified",
+              "unit": "currency/share",
+              "value": null
+            },
+            {
+              "currency": "BRL",
+              "name": "window_3",
+              "period": {
+                "end": "2023-10-29",
+                "start": "2022-10-30"
+              },
+              "quality": "missing",
+              "reason": "full five-window history coverage is not certified",
+              "unit": "currency/share",
+              "value": null
+            },
+            {
+              "currency": "BRL",
+              "name": "window_4",
+              "period": {
+                "end": "2022-10-29",
+                "start": "2021-10-30"
+              },
+              "quality": "missing",
+              "reason": "full five-window history coverage is not certified",
+              "unit": "currency/share",
+              "value": null
+            }
+          ],
+          "rule_version": "bazin-cash-v1",
+          "state": "unknown",
+          "synthetic": true
+        }
+      ],
+      "synthetic": true
+    }
+  ],
+  "schema": "novera-synthetic-comparison-v1",
+  "synthetic": true,
+  "total_scenarios": 3
+}

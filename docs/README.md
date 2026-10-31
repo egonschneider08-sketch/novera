@@ -26,3 +26,7 @@ conforme o protocolo. Evidencias de aceitacao ficam nos PRs do GitHub.
 - [Pesquisa sintética demonstrável](research-demo.md): casos PASS/FAIL/UNKNOWN, CLI, JSON e limites da experiência (NV-024).
 
 - [Comparação e exportação sintéticas](research-compare.md): estados por metodologia e JSON/CSV auditáveis, sem ranking (NV-010 fase inicial).
+
+- [Interface web sintética React](../frontend/README.md): UX LAB-A/B/C, metodologia, proveniência, estados vazio/erro/stale e exportações (NV-011).
+
+- [ADR-0008](adr/ADR-0008-react-synthetic-research-ui.md): fronteira de dados, build reproduzível e justificativa da primeira interface.
