@@ -102,6 +102,22 @@ os snapshots e simular estados de erro, vazio e stale. Para acessar com
 outros dispositivos na sua rede seria necessaria configuracao deliberada;
 o comando padrao atende apenas `127.0.0.1`.
 
+## API local de demonstração — NV-014
+
+A primeira API versionada FastAPI responde **somente** aos três casos
+fictícios LAB-A/B/C (Graham/Bazin, comparação e CSV). Ela usa os contratos
+financeiros Python existentes, não consulta brapi/BCB, não requer conta e
+não disponibiliza informações reais. O servidor padrão escuta apenas em
+`127.0.0.1:8765` e **não deve ser exposto na internet**.
+
+```sh
+uv sync --locked --group dev
+uv run --offline --locked python -m novera.demo_api
+# Em outro terminal: http://127.0.0.1:8765/api/v1/demo/scenarios
+```
+
+Rotas e responsabilidades: [guia da API sintética](docs/demo-api.md).
+
 ## Estrutura
 
 ```text
