@@ -35,3 +35,5 @@ jobs:
       - name: Build, test and audit locked React interface
         working-directory: frontend
         run: npm ci --ignore-scripts --no-fund && npm run build && npm run test && npm audit --audit-level=high
+      - name: Verify actual compiled frontend served by synthetic FastAPI
+        run: uv run --offline --locked python scripts/check_local_lab_build.py
