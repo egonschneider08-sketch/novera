@@ -36,3 +36,5 @@ conforme o protocolo. Evidencias de aceitacao ficam nos PRs do GitHub.
 
 - [Política RBAC por tenant](authorization.md): Viewer, Analyst, Owner e autorização fail-closed, ainda sem login (NV-016 recorte 1).
 - [ADR-0010](adr/ADR-0010-tenant-rbac-policy.md): matrizes de permissões, fronteiras e direitos de dados.
+
+- [Laboratório full stack local](local-lab.md): um único servidor React + FastAPI com dados fictícios, execução PowerShell e modos API/snapshot (NV-025).
