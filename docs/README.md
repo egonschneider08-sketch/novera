@@ -33,3 +33,6 @@ conforme o protocolo. Evidencias de aceitacao ficam nos PRs do GitHub.
 
 - [API FastAPI de laboratório](demo-api.md): endpoints v1 de cenários fictícios, contratos e controles locais (NV-014).
 - [ADR-0009](adr/ADR-0009-versioned-synthetic-demo-api.md): decisão de FastAPI, validações e limites de segurança.
+
+- [Política RBAC por tenant](authorization.md): Viewer, Analyst, Owner e autorização fail-closed, ainda sem login (NV-016 recorte 1).
+- [ADR-0010](adr/ADR-0010-tenant-rbac-policy.md): matrizes de permissões, fronteiras e direitos de dados.
