@@ -6,7 +6,6 @@ Run *after* npm run build in frontend CI, not in the Python-only quality job.
 import re
 
 from fastapi.testclient import TestClient
-
 from novera.local_lab import create_local_app
 
 
