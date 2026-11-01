@@ -70,7 +70,8 @@ def test_existing_file_is_rejected_before_asking_for_any_password(tmp_path, monk
     path = tmp_path / "identity.sqlite3"
     path.write_bytes(b"do-not-overwrite")
     monkeypatch.setattr(
-        app.getpass, "getpass",
+        app.getpass,
+        "getpass",
         lambda _prompt: (_ for _ in ()).throw(AssertionError("prompt unexpectedly invoked")),
     )
     assert app.main(_args(path)) == 1
@@ -94,6 +95,7 @@ def test_noninteractive_cli_refuses_to_request_password(tmp_path, monkeypatch):
 
 def test_password_confirmation_mismatch_creates_no_account_file(tmp_path, monkeypatch):
     app = _load_bootstrap()
+
     class Interactive:
         def isatty(self):
             return True
