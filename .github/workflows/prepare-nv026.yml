@@ -25,3 +25,7 @@ jobs:
           print(Path("uv.lock").read_text(encoding="utf-8"), end="")
           print("---END_NOVERA_LOCK_NV026---")
           PY
+      - name: Inspect exact Ruff formatting diff
+        run: |
+          uv sync --locked --group dev
+          uv run --offline --locked ruff format --diff backend/src/novera/identity.py backend/tests/test_identity.py scripts/bootstrap_local_identity.py
