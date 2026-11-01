@@ -40,9 +40,7 @@ def store():
 @pytest.fixture
 def configured(store):
     store.create_user("analyst-a", PASSWORD)
-    store.set_membership(
-        "analyst-a", "company-a", Role.ANALYST, frozenset({"research", "demo"})
-    )
+    store.set_membership("analyst-a", "company-a", Role.ANALYST, frozenset({"research", "demo"}))
     return store
 
 
@@ -59,9 +57,12 @@ def test_hash_uses_argon2id_strong_params_with_unique_salt(configured):
     assert row["password_hash"].startswith("$argon2id$v=19$m=19456,t=2,p=1$")
     assert PASSWORD not in row["password_hash"]
     assert PasswordHasher().verify(row["password_hash"], PASSWORD)
-    assert configured._db.execute(
-        "SELECT password_hash FROM users WHERE subject='unlisted'"
-    ).fetchone() is None
+    assert (
+        configured._db.execute(
+            "SELECT password_hash FROM users WHERE subject='unlisted'"
+        ).fetchone()
+        is None
+    )
     configured.create_user("analyst-b", PASSWORD)
     second = configured._db.execute(
         "SELECT password_hash FROM users WHERE subject='analyst-b'"
@@ -94,12 +95,15 @@ def test_verified_session_yields_precise_tenant_rbac_context(configured):
     assert context.scope.credential_revision == context.principal.credential_revision
     assert context.principal.entitlements == frozenset({"research", "demo"})
     require_permission(context.principal, context.scope, Permission.VIEW_RESEARCH, synthetic=True)
-    assert evaluate(
-        context.principal, context.scope, Permission.EXPORT_RESEARCH, synthetic=False
-    ).allowed is False
+    assert (
+        evaluate(
+            context.principal, context.scope, Permission.EXPORT_RESEARCH, synthetic=False
+        ).allowed
+        is False
+    )
 
 
-@pytest.mark.parametrize("token", ["", "x", " "*43, "a"*44, 1234, None, "a"*42+"="])
+@pytest.mark.parametrize("token", ["", "x", " " * 43, "a" * 44, 1234, None, "a" * 42 + "="])
 def test_untrusted_or_invalid_bearer_secret_never_authenticates(configured, token):
     assert configured.resolve(token, tenant="company-a", entitlement="research") is None
 
@@ -120,9 +124,7 @@ def test_cross_tenant_or_outside_entitlement_is_not_authorized(configured, tenan
 
 
 def test_same_user_multiple_tenants_have_independent_sessions(configured):
-    configured.set_membership(
-        "analyst-a", "company-b", Role.VIEWER, frozenset({"research"})
-    )
+    configured.set_membership("analyst-a", "company-b", Role.VIEWER, frozenset({"research"}))
     token_a = configured.issue_session("analyst-a", PASSWORD, "company-a")
     token_b = configured.issue_session("analyst-a", PASSWORD, "company-b")
     ctx_a = configured.resolve(token_a.token, tenant="company-a", entitlement="research")
@@ -179,9 +181,7 @@ def test_invalid_session_ttl_is_rejected(configured, ttl):
 
 def test_membership_role_change_revokes_old_session_before_new_role_applies(configured):
     old = configured.issue_session("analyst-a", PASSWORD, "company-a")
-    configured.set_membership(
-        "analyst-a", "company-a", Role.OWNER, frozenset({"research"})
-    )
+    configured.set_membership("analyst-a", "company-a", Role.OWNER, frozenset({"research"}))
     assert configured.resolve(old.token, tenant="company-a", entitlement="research") is None
     new = configured.issue_session("analyst-a", PASSWORD, "company-a")
     context = configured.resolve(new.token, tenant="company-a", entitlement="research")
@@ -194,8 +194,11 @@ def test_membership_role_change_revokes_old_session_before_new_role_applies(conf
 def test_suspended_membership_rejects_new_and_existing_sessions(configured):
     old = configured.issue_session("analyst-a", PASSWORD, "company-a")
     configured.set_membership(
-        "analyst-a", "company-a", Role.ANALYST,
-        frozenset({"research"}), status=MembershipStatus.SUSPENDED,
+        "analyst-a",
+        "company-a",
+        Role.ANALYST,
+        frozenset({"research"}),
+        status=MembershipStatus.SUSPENDED,
     )
     assert configured.resolve(old.token, tenant="company-a", entitlement="research") is None
     with pytest.raises(AuthenticationError):
@@ -204,9 +207,7 @@ def test_suspended_membership_rejects_new_and_existing_sessions(configured):
 
 def test_entitlement_revocation_fails_closed(configured):
     grant = configured.issue_session("analyst-a", PASSWORD, "company-a")
-    configured.set_membership(
-        "analyst-a", "company-a", Role.ANALYST, frozenset({"demo"})
-    )
+    configured.set_membership("analyst-a", "company-a", Role.ANALYST, frozenset({"demo"}))
     assert configured.resolve(grant.token, tenant="company-a", entitlement="research") is None
     new = configured.issue_session("analyst-a", PASSWORD, "company-a")
     assert configured.resolve(new.token, tenant="company-a", entitlement="research") is None
@@ -246,7 +247,7 @@ def test_wrong_old_password_never_changes_hash_or_revokes_valid_session(configur
     assert configured.resolve(grant.token, tenant="company-a", entitlement="demo") is not None
 
 
-@pytest.mark.parametrize("new", ["short", "", " "*2, "a"*129, "foo\nbar long enough"])
+@pytest.mark.parametrize("new", ["short", "", " " * 2, "a" * 129, "foo\nbar long enough"])
 def test_weak_or_invalid_new_password_is_rejected(configured, new):
     with pytest.raises(IdentityError):
         configured.change_password("analyst-a", PASSWORD, new)
@@ -268,7 +269,9 @@ def test_provision_uses_strict_immutable_membership_and_no_sql_injection(store):
     assert store.issue_session("someone", PASSWORD, "company-a")
 
 
-@pytest.mark.parametrize("subject", ["", " ", " leading", "trailing ", "line\nbreak", "a"*129, 42])
+@pytest.mark.parametrize(
+    "subject", ["", " ", " leading", "trailing ", "line\nbreak", "a" * 129, 42]
+)
 def test_invalid_subjects_never_provision_users(store, subject):
     with pytest.raises(IdentityError):
         store.create_user(subject, PASSWORD)
