@@ -9,7 +9,7 @@ from novera.authorization import Permission, require_permission
 from novera.identity import IdentityStore
 
 BOOTSTRAP = Path(__file__).resolve().parents[2] / "scripts" / "bootstrap_local_identity.py"
-PASSWORD = "local synthetic passphrase!1234"
+PHRASE = "local synthetic passphrase!1234"
 
 
 def _load_bootstrap():
@@ -36,7 +36,7 @@ def test_local_bootstrap_interactive_creates_only_owner_but_no_http_login(
 
     monkeypatch.setattr(sys, "stdin", Interactive())
     prompts = []
-    answers = iter([PASSWORD, PASSWORD])
+    answers = iter([PHRASE, PHRASE])
     def answer(prompt):
         prompts.append(prompt)
         return next(answers)
@@ -46,10 +46,10 @@ def test_local_bootstrap_interactive_creates_only_owner_but_no_http_login(
     assert app.main(_args(path)) == 0
     messages = capsys.readouterr()
     assert "Local identity provisioned" in messages.out
-    assert PASSWORD not in messages.out + messages.err
+    assert PHRASE not in messages.out + messages.err
     assert len(prompts) == 2
     with IdentityStore.local(path) as store:
-        grant = store.issue_session("operator-a", PASSWORD, "lab-a")
+        grant = store.issue_session("operator-a", PHRASE, "lab-a")
         context = store.resolve(grant.token, tenant="lab-a", entitlement="research-demo")
         require_permission(
             context.principal, context.scope, Permission.MANAGE_USERS, synthetic=True,
@@ -90,7 +90,7 @@ def test_password_confirmation_mismatch_creates_no_account_file(tmp_path, monkey
             return True
 
     monkeypatch.setattr(sys, "stdin", Interactive())
-    values = iter([PASSWORD, "a different synthetic secret!99"])
+    values = iter([PHRASE, "a different synthetic secret!99"])
     monkeypatch.setattr(app.getpass, "getpass", lambda _prompt: next(values))
     path = tmp_path / "identity.sqlite3"
     assert app.main(_args(path)) == 1
