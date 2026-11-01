@@ -38,3 +38,6 @@ conforme o protocolo. Evidencias de aceitacao ficam nos PRs do GitHub.
 - [ADR-0010](adr/ADR-0010-tenant-rbac-policy.md): matrizes de permissões, fronteiras e direitos de dados.
 
 - [Laboratório full stack local](local-lab.md): um único servidor React + FastAPI com dados fictícios, execução PowerShell e modos API/snapshot (NV-025).
+
+- [Identidade local e sessões](identity.md): hash Argon2id, banco separado, bootstrap interativo e limites de segurança (NV-026 A).
+- [ADR-0012](adr/ADR-0012-identity-sessions-argon2id.md): threat model, política de sessão, revogação e próximos requisitos.
