@@ -44,8 +44,9 @@ def main(argv: list[str] | None = None) -> int:
                 frozenset({args.entitlement}),
             )
     except (OSError, IdentityError, FileExistsError):
-        print("Local identity bootstrap rejected; check permissions and target path.",
-              file=sys.stderr)
+        print(
+            "Local identity bootstrap rejected; check permissions and target path.", file=sys.stderr
+        )
         return 1
     print("Local identity provisioned. No HTTP login or session endpoint exists yet.")
     return 0
