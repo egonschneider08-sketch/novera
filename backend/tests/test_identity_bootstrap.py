@@ -21,15 +21,22 @@ def _load_bootstrap():
 
 def _args(path):
     return [
-        "--database", str(path), "--subject", "operator-a",
-        "--tenant", "lab-a", "--entitlement", "research-demo",
+        "--database",
+        str(path),
+        "--subject",
+        "operator-a",
+        "--tenant",
+        "lab-a",
+        "--entitlement",
+        "research-demo",
     ]
 
 
 def test_local_bootstrap_interactive_creates_only_owner_but_no_http_login(
-    tmp_path, monkeypatch, capsys,
+    tmp_path, monkeypatch, capsys
 ):
     app = _load_bootstrap()
+
     class Interactive:
         def isatty(self):
             return True
@@ -37,6 +44,7 @@ def test_local_bootstrap_interactive_creates_only_owner_but_no_http_login(
     monkeypatch.setattr(sys, "stdin", Interactive())
     prompts = []
     answers = iter([PHRASE, PHRASE])
+
     def answer(prompt):
         prompts.append(prompt)
         return next(answers)
@@ -52,7 +60,7 @@ def test_local_bootstrap_interactive_creates_only_owner_but_no_http_login(
         grant = store.issue_session("operator-a", PHRASE, "lab-a")
         context = store.resolve(grant.token, tenant="lab-a", entitlement="research-demo")
         require_permission(
-            context.principal, context.scope, Permission.MANAGE_USERS, synthetic=True,
+            context.principal, context.scope, Permission.MANAGE_USERS, synthetic=True
         )
         assert store.resolve(grant.token, tenant="lab-b", entitlement="research-demo") is None
 
@@ -71,6 +79,7 @@ def test_existing_file_is_rejected_before_asking_for_any_password(tmp_path, monk
 
 def test_noninteractive_cli_refuses_to_request_password(tmp_path, monkeypatch):
     app = _load_bootstrap()
+
     class NonInteractive:
         def isatty(self):
             return False
