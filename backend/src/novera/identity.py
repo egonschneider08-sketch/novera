@@ -240,8 +240,7 @@ class IdentityStore:
         actual = {
             row[0]
             for row in self._db.execute(
-                "SELECT sql FROM sqlite_master WHERE sql IS NOT NULL "
-                "AND name NOT LIKE 'sqlite_%'"
+                "SELECT sql FROM sqlite_master WHERE sql IS NOT NULL AND name NOT LIKE 'sqlite_%'"
             )
         }
         if app != APPLICATION_ID or version != SCHEMA_VERSION or actual != set(_SCHEMA):
@@ -261,9 +260,7 @@ class IdentityStore:
         revision = secrets.token_hex(16)
         try:
             with self._db:
-                self._db.execute(
-                    "INSERT INTO users VALUES (?,?,?,0)", (subject, digest, revision)
-                )
+                self._db.execute("INSERT INTO users VALUES (?,?,?,0)", (subject, digest, revision))
         except sqlite3.Error:
             raise IdentityError("unable to provision identity") from None
 
@@ -464,9 +461,7 @@ class IdentityStore:
         digest = _digest(token)
         if digest is not None:
             with self._db:
-                self._db.execute(
-                    "UPDATE sessions SET revoked=1 WHERE token_digest=?", (digest,)
-                )
+                self._db.execute("UPDATE sessions SET revoked=1 WHERE token_digest=?", (digest,))
 
     def change_password(self, subject: str, old_password: str, new_password: str) -> None:
         """Rotate hash and credential revision; revoke all sessions atomically."""
