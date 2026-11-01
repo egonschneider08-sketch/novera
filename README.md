@@ -150,6 +150,21 @@ a branch correta, testar, configurar e entender as limitações de segurança.
 **Nunca exponha essa API na internet**, pois cadastro/login e isolamento de
 clientes ainda não estão implementados.
 
+## Identidade e sessões locais — NV-026 (fase A)
+
+A primeira base de **identidade persistente** utiliza um SQLite
+separado, hash Argon2id e sessões opacas revogáveis. Permissões
+de produto são derivadas do tenant, dos entitlements e das sessões
+válidas, seguindo o RBAC já integrado ao Novera. Não há usuários
+predefinidos e o bootstrap exige intervenção do operador no terminal.
+
+**Atenção:** isso ainda **não** implementa login pela interface
+React, recuperação de senha, endpoints HTTP privados, segurança
+contra abuso público ou autorização de dados reais. Não exponha
+o servidor local na internet. Veja
+[documentação de identidade](docs/identity.md) e
+[ADR-0012](docs/adr/ADR-0012-identity-sessions-argon2id.md).
+
 ## Estrutura
 
 ```text
