@@ -18,6 +18,7 @@ import stat
 import time
 from collections.abc import Callable
 from dataclasses import dataclass, field
+from functools import lru_cache
 from pathlib import Path
 
 from argon2 import PasswordHasher, Type
@@ -132,12 +133,11 @@ def _digest(token: object) -> str | None:
     return hashlib.sha256(token.encode("ascii")).hexdigest()
 
 
+@lru_cache(maxsize=1)
 def _dummy_hash() -> str:
     # Hash once per Python process to reduce account-enumeration timing
     # differences. This is not a replacement for HTTP rate limiting.
-    if not hasattr(_dummy_hash, "_cached"):
-        _dummy_hash._cached = _HASHER.hash("internal-non-account-password-only")
-    return _dummy_hash._cached
+    return _HASHER.hash("internal-non-account-password-only")
 
 
 class IdentityStore:
@@ -157,6 +157,7 @@ class IdentityStore:
         if not callable(self._now):
             self._db.close()
             raise IdentityError("invalid clock")
+        _dummy_hash()  # warm up before the first unknown-user authentication attempt
 
     @classmethod
     def memory(cls, *, now: Callable[[], int] = None) -> IdentityStore:
@@ -179,10 +180,20 @@ class IdentityStore:
             raise IdentityError("linked identity database paths are not supported")
         if create:
             # Atomic exclusive create with owner-only permissions on POSIX.
-            fd = os.open(path, os.O_CREAT | os.O_EXCL | os.O_WRONLY, 0o600)
-            os.close(fd)
-        if os.name == "posix" and path.stat().st_mode & (stat.S_IRWXG | stat.S_IRWXO):
-            raise IdentityError("identity database permissions are too broad")
+            try:
+                fd = os.open(path, os.O_CREAT | os.O_EXCL | os.O_WRONLY, 0o600)
+                os.close(fd)
+            except FileExistsError:
+                raise
+            except OSError:
+                raise IdentityError("identity database unavailable") from None
+        try:
+            if not path.is_file():
+                raise IdentityError("identity database unavailable")
+            if os.name == "posix" and path.stat().st_mode & (stat.S_IRWXG | stat.S_IRWXO):
+                raise IdentityError("identity database permissions are too broad")
+        except OSError:
+            raise IdentityError("identity database unavailable") from None
         try:
             connection = sqlite3.connect(
                 path.as_uri() + "?mode=rw",
@@ -200,7 +211,7 @@ class IdentityStore:
             return store
         except Exception:
             store.close()
-            raise IdentityError("unsupported or invalid identity database") from None
+            raise IdentityError("unsupported identity database schema") from None
 
     def __enter__(self) -> IdentityStore:
         return self
@@ -305,14 +316,16 @@ class IdentityStore:
         if type(disabled) is not bool:
             raise IdentityError("invalid identity state")
         try:
-            with self._db:
-                cursor = self._db.execute(
-                    "UPDATE users SET disabled=? WHERE subject=?", (int(disabled), subject)
-                )
-                if cursor.rowcount != 1:
-                    raise IdentityError("identity not found")
-                self._db.execute("UPDATE sessions SET revoked=1 WHERE subject=?", (subject,))
-        except sqlite3.Error:
+            self._db.execute("BEGIN IMMEDIATE")
+            cursor = self._db.execute(
+                "UPDATE users SET disabled=? WHERE subject=?", (int(disabled), subject)
+            )
+            if cursor.rowcount != 1:
+                raise IdentityError("identity not found")
+            self._db.execute("UPDATE sessions SET revoked=1 WHERE subject=?", (subject,))
+            self._db.commit()
+        except Exception:
+            self._db.rollback()
             raise IdentityError("unable to update identity") from None
 
     def issue_session(
