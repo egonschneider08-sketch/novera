@@ -27,6 +27,9 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
     if not args.database.is_absolute():
         parser.error("--database must be an absolute path")
+    if args.database.exists():
+        print("Local identity bootstrap rejected; target already exists.", file=sys.stderr)
+        return 1
     if not sys.stdin.isatty():
         parser.error("bootstrap requires an interactive terminal; no password piping")
     first = getpass.getpass("New local password (12+ characters): ")
