@@ -7,7 +7,7 @@ from dataclasses import FrozenInstanceError
 from pathlib import Path
 
 import pytest
-from argon2 import PasswordHasher, Type
+from argon2 import PasswordHasher
 from novera.authorization import (
     MembershipStatus,
     Permission,
