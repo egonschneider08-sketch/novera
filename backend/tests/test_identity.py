@@ -265,7 +265,7 @@ def test_provision_uses_strict_immutable_membership_and_no_sql_injection(store):
     with pytest.raises(IdentityError):
         store.set_membership("unknown", "company-a", Role.OWNER, frozenset({"demo"}))
     with pytest.raises(AuthenticationError):
-        store.issue_session("someone' OR 1=1 --", PASSWORD, "company-a")
+        store.issue_session("someone'OR'1'='1", PASSWORD, "company-a")
     assert store.issue_session("someone", PASSWORD, "company-a")
 
 
