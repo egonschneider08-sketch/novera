@@ -440,3 +440,11 @@ td { color: #61797e; }
   .source-options { width: 100%; }
   .source-options button { flex: 1; }
 }
+
+.thesis-review { max-width: 62rem; margin: 1rem auto; padding: 1rem; border: 1px solid currentColor; border-radius: .75rem; overflow-x: auto; }
+.thesis-review summary { cursor: pointer; font-weight: 650; }
+.thesis-review table { width: 100%; margin: 1rem 0; text-align: left; }
+.thesis-review form, .thesis-review label { display: grid; gap: .5rem; }
+.thesis-review form { margin: 1rem 0; max-width: 40rem; gap: 1rem; }
+.thesis-review textarea { min-height: 5rem; }
+.thesis-review article { border-top: 1px solid currentColor; padding-top: .6rem; overflow-wrap: anywhere; }
