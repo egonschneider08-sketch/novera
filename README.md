@@ -192,3 +192,10 @@ Primeiro adaptador de cotacao, validado somente com dados sinteticos:
 
 Serie economica inicial, conversao Decimal e testes offline:
 [BCB SGS 432](docs/bcb-adapter.md).
+
+## Eventos de proventos — NV-027
+
+O adaptador interno `novera.brapi_dividends` consulta o contrato v2 de proventos
+com janela explícita, Decimal e identidade verificada. Eventos continuam **não
+verificados como pagamentos**, sem alimentar Bazin ou o laboratório web.
+Veja [contrato e testes offline](docs/brapi-dividends.md).
