@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import LabApp from "./LabApp";
+import ResearchHome from "./ResearchHome";
 import WegStudy from "./WegStudy";
 
 function onNavigation(update: () => void) {
@@ -10,7 +11,9 @@ function onNavigation(update: () => void) {
 
 function Application() {
   const route = React.useSyncExternalStore(onNavigation, () => location.hash);
-  return route === "#estudos/weg-2t25" ? <WegStudy /> : <LabApp />;
+  if (route === "#estudos/weg-2t25") return <WegStudy />;
+  if (route === "#laboratorio") return <LabApp />;
+  return <ResearchHome />;
 }
 
 const root = document.getElementById("root");

@@ -1,0 +1,16 @@
+.research-index,.company-page { width:min(100% - 2rem,60rem); margin:auto; padding:clamp(2rem,6vw,5rem) 0; }
+.research-index h1,.company-page h1 { font-size:clamp(2.15rem,5vw,3.7rem); letter-spacing:-.055em; line-height:1.1; margin:.7rem 0; }
+.index-lead,.practice-study p,.company-page > p { color:#455e68; line-height:1.6; }
+.company-study { margin:2rem 0 1.4rem; padding:clamp(1.5rem,5vw,3.5rem); background:#153d3c; color:#f2fbf6; border-radius:1.25rem; }
+.company-meta { display:flex; justify-content:space-between; gap:1rem; flex-wrap:wrap; font-weight:650; color:#b6e6d4; }
+.company-study h2 { font-size:clamp(1.8rem,4vw,3rem); line-height:1.12; letter-spacing:-.045em; margin:2rem 0 .6rem; }
+.company-study p { line-height:1.65; max-width:52ch; }
+.study-action { display:inline-block; margin-top:1rem; padding:.85rem 1rem; background:#c4eed7; color:#123b32; border-radius:.55rem; text-decoration:none; font-weight:700; }
+.practice-study { display:flex; align-items:center; justify-content:space-between; gap:1rem; padding:1.4rem; background:white; border:1px solid #cddbd6; border-radius:1rem; }
+.practice-study h2,.practice-study p { margin:.25rem 0; }
+.practice-study a,.company-page > a { color:#175d4b; font-weight:650; }
+.practice-study a { flex-shrink:0; }
+.company-page .thesis-review { background:white; border-color:#cadbd4; padding:clamp(1rem,3vw,2rem); }
+.company-page .thesis-review caption { text-align:left; font-weight:650; padding-bottom:.7rem; }
+.company-page .thesis-review th,.company-page .thesis-review td { padding:.55rem .3rem; border-bottom:1px solid #d9e5df; font-variant-numeric:tabular-nums; }
+@media(max-width:640px){.practice-study { align-items:flex-start; flex-direction:column; } .company-page .thesis-review table { font-size:.85rem; }}
