@@ -8,17 +8,28 @@ const statements = [
 ];
 type Review = { at: string; decision: string; reason: string };
 
-function history(): Review[] {
+function readHistory() {
+  let unreadable = 0;
   const records: Review[] = [];
   for (const key of Object.keys(localStorage).filter(key => key.startsWith(prefix))) {
-    const entry = JSON.parse(localStorage.getItem(key) ?? "null");
+    const raw = localStorage.getItem(key);
+    if (raw === null) continue;
+    let entry;
+    try {
+      entry = JSON.parse(raw);
+    } catch {
+      unreadable++;
+      continue;
+    }
     if (!entry || typeof entry.at !== "string" || !Number.isFinite(Date.parse(entry.at)) ||
         !decisions.some(d => d === entry.decision) || typeof entry.reason !== "string") {
-      throw new Error("Invalid review");
+      unreadable++;
+      continue;
     }
     records.push(entry);
   }
-  return records.sort((a, b) => b.at.localeCompare(a.at));
+  records.sort((a, b) => b.at.localeCompare(a.at));
+  return { records, unreadable };
 }
 
 export default function ThesisReview() {
@@ -26,8 +37,14 @@ export default function ThesisReview() {
   const [reason, setReason] = useState("");
   const [records, setRecords] = useState<Review[]>([]);
   const [message, setMessage] = useState("");
+  const [unreadable, setUnreadable] = useState(0);
   function refresh() {
-    try { setRecords(history()); setMessage(""); }
+    try {
+      const snapshot = readHistory();
+      setRecords(snapshot.records);
+      setUnreadable(snapshot.unreadable);
+      setMessage("");
+    }
     catch { setMessage("Não foi possível ler todo o histórico deste navegador."); }
   }
   return <details className="thesis-review" onToggle={e => { if (e.currentTarget.open) refresh(); }}>
@@ -50,9 +67,10 @@ export default function ThesisReview() {
       if (!decision || !reason.trim()) return;
       const record = { at: new Date().toISOString(), decision, reason: reason.trim() };
       try {
-        const previous = history();
+        const previous = readHistory();
         localStorage.setItem(prefix + crypto.randomUUID(), JSON.stringify(record));
-        setRecords([record, ...previous]); setReason(""); setDecision("");
+        setUnreadable(previous.unreadable);
+        setRecords([record, ...previous.records]); setReason(""); setDecision("");
         setMessage("Revisão registrada neste navegador.");
       } catch { setMessage("Falha ao salvar. Copie sua justificativa antes de sair."); }
     }}>
@@ -64,6 +82,9 @@ export default function ThesisReview() {
     </form>
     <p role="status">{message}</p>
     <h3>Histórico neste navegador</h3>
+    {unreadable > 0 && <p role="status">
+      {unreadable === 1 ? "1 registro ilegível foi preservado." : `${unreadable} registros ilegíveis foram preservados.`}
+    </p>}
     <p>As revisões ficam neste dispositivo. Use apenas notas do exercício fictício.</p>
     {records.map((entry, i) => <article key={i}><strong>{entry.decision}</strong> · {new Date(entry.at).toLocaleString("pt-BR")}<p>{entry.reason}</p></article>)}
   </details>;
