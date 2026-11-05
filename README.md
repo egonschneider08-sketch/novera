@@ -200,3 +200,6 @@ dos dois trimestres e registre sua decisão. O histórico fica neste navegador, 
 versão do caso fictício. Para avaliar a experiência, peça a outro leitor para
 explicar qual premissa mudou, localizar o número que motivou a revisão e reabrir
 a justificativa após atualizar a página. Registre o tempo e onde ele precisou de ajuda.
+
+Na página inicial do Lab, **Estudo documental · WEG 2T25** abre a ficha retrospectiva
+com a DRE pública consolidada, fonte primária e histórico próprio deste estudo.

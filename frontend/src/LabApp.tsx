@@ -47,6 +47,7 @@ export default function LabApp() {
 
   return (
     <>
+      <nav className="thesis-review" aria-label="Estudos documentais"><a href="#estudos/weg-2t25">Estudo documental · WEG 2T25</a></nav>
       <section className="source-bar" aria-label="Origem dos dados financeiros fictícios">
         <div className="source-description">
           <strong>Modo de dados</strong>
