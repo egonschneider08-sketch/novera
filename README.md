@@ -192,3 +192,11 @@ Primeiro adaptador de cotacao, validado somente com dados sinteticos:
 
 Serie economica inicial, conversao Decimal e testes offline:
 [BCB SGS 432](docs/bcb-adapter.md).
+
+## Revisão de tese (NV-028)
+
+No laboratório local, abra **Revisão de tese · laboratório fictício**, confira a fonte
+dos dois trimestres e registre sua decisão. O histórico fica neste navegador, por
+versão do caso fictício. Para avaliar a experiência, peça a outro leitor para
+explicar qual premissa mudou, localizar o número que motivou a revisão e reabrir
+a justificativa após atualizar a página. Registre o tempo e onde ele precisou de ajuda.

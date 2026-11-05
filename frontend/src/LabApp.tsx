@@ -1,3 +1,4 @@
+import ThesisReview from "./ThesisReview";
 import { useEffect, useState } from "react";
 import App from "./App";
 import { parseComparison, type Comparison } from "./contracts";
@@ -78,6 +79,8 @@ export default function LabApp() {
           </span>
         )}
       </section>
+
+      {source === "snapshot" && <ThesisReview />}
 
       {source === "snapshot" ? (
         <App />
