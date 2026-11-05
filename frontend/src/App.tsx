@@ -298,18 +298,7 @@ export function App({ data = fixture, enableCsvExport = true }: { data?: unknown
         <span className="ribbon-dot" aria-hidden="true" />
         AMBIENTE DE DEMONSTRAÇÃO — DADOS 100% FICTÍCIOS · SEM COTAÇÕES REAIS
       </div>
-      <header className="topbar">
-        <a className="wordmark" href="#inicio" aria-label="Novera, início">
-          <span className="brand-mark" aria-hidden="true"><span>ᐱ</span></span>
-          <span className="brand-name">novera<span>.</span></span>
-        </a>
-        <div className="topbar-right">
-          <span className="topbar-context">Plataforma de pesquisa</span>
-          <a href="https://github.com/egonschneider08-sketch/novera/blob/main/docs/research-demo.md"
-             target="_blank" rel="noreferrer" className="docs-link">Documentação <span aria-hidden="true">↗</span></a>
-          <span className="lab-avatar" aria-label="Ambiente LAB">LAB</span>
-        </div>
-      </header>
+
       <div className="layout">
         <aside className="sidebar" aria-label="Navegação de pesquisa">
           <div className="sidebar-group">

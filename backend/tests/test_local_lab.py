@@ -102,3 +102,28 @@ def test_static_and_api_transport_is_in_process_without_network(client, monkeypa
     assert client.get("/").status_code == 200
     assert client.get("/api/v1/demo/comparison.csv").status_code == 200
     assert client.get("/api/v1/demo/scenarios/incomplete").json()["synthetic"] is True
+
+
+def test_market_route_requires_explicit_read_and_fixed_series(client):
+    assert client.get("/api/v1/market/petr4").status_code == 403
+    response = client.get("/api/v1/market/arbitrary", headers={"X-Novera-Read": "interactive"})
+    assert response.status_code == 404
+
+
+def test_selic_route_returns_percent_for_requested_quarter_end(client, monkeypatch):
+    import httpx
+    from novera.http import SecureHttpClient
+
+    def answer(request):
+        assert request.url.params["dataFinal"] == "30/06/2025"
+        return httpx.Response(200, json=[{"data": "30/06/2025", "valor": "15.00"}])
+
+    with SecureHttpClient(
+        "bcb", "https://api.bcb.gov.br", transport=httpx.MockTransport(answer)
+    ) as bcb:
+        monkeypatch.setattr(client.app.state, "bcb", bcb)
+        data = client.get(
+            "/api/v1/market/selic-2t25", headers={"X-Novera-Read": "interactive"}
+        ).json()
+    assert float(data["value"]) == 15 and data["reference"] == "2025-06-30"
+    assert data["provider"] == "bcb"

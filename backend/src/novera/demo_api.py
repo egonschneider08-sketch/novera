@@ -165,9 +165,10 @@ class HealthOut(StrictRecord):
     data_mode: Literal["synthetic-only"]
 
 
-def create_app() -> FastAPI:
+def create_app(*, lifespan=None) -> FastAPI:
     """Build an HTTP adapter for already validated, immutable lab reports."""
     application = FastAPI(
+        lifespan=lifespan,
         title="Novera — API de laboratório fictício",
         description="Somente cenários LAB; nenhum dado de mercado ou serviço de produção.",
         version="0.1.0",

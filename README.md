@@ -207,3 +207,13 @@ com a DRE pública consolidada, fonte primária e histórico próprio deste estu
 A entrada **Estudos de ações** oferece dois caminhos. **Analisar resultados da WEG**
 abre a comparação trimestral e sua fonte. **Abrir laboratório fictício** leva aos
 cenários Aurora e aos modos de consulta local. O link direto da WEG continua válido.
+
+### Consultas de mercado e contexto econômico
+
+Inicie o servidor integrado com `scripts/start-local-lab.cmd` no Windows.
+Em Estudos, **Consultar cotação** busca PETR4 na brapi. No estudo da WEG,
+**Consultar Selic** busca a meta anual do BCB em 30/06/2025. Cada consulta
+mostra a data do dado e a coleta. O cache local pode reutilizar uma resposta
+por até um minuto. Apenas o botão aciona o provedor. A DRE continua documental.
+No modo Vite, mantenha o backend em 127.0.0.1:8765 para as consultas.
+Se sua rede exigir proxy, o operador pode configurar NOVERA_MARKET_PROXY.
