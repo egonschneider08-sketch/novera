@@ -47,7 +47,7 @@ export default function LabApp() {
 
   return (
     <>
-      <nav className="thesis-review" aria-label="Estudos documentais"><a href="#inicio">← Estudos de ações</a></nav>
+      <div className="lab-heading"><small>Simulação com dados fictícios</small><h1>Laboratório de ações</h1></div>
       <section className="source-bar" aria-label="Origem dos dados financeiros fictícios">
         <div className="source-description">
           <strong>Modo de dados</strong>

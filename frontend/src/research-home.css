@@ -14,3 +14,27 @@
 .company-page .thesis-review caption { text-align:left; font-weight:650; padding-bottom:.7rem; }
 .company-page .thesis-review th,.company-page .thesis-review td { padding:.55rem .3rem; border-bottom:1px solid #d9e5df; font-variant-numeric:tabular-nums; }
 @media(max-width:640px){.practice-study { align-items:flex-start; flex-direction:column; } .company-page .thesis-review table { font-size:.85rem; }}
+
+.research-nav {background:#102f30;color:#f5fbf8;display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.95rem clamp(1rem,5vw,5rem);flex-wrap:wrap}
+.research-nav .wordmark {font-weight:750;font-size:1.45rem;letter-spacing:-.055em}
+.research-nav nav {display:flex;gap:.3rem}
+.research-nav nav a {padding:.6rem .85rem;border-radius:.55rem;color:#cfdfda;text-decoration:none;font-size:.9rem}
+.research-nav nav a[aria-current],.research-nav nav a:hover {background:#244b48;color:#fff}
+.study-cover,.lab-heading,.app .asset-hero {background:#153d3c;color:#f2fbf6;border-radius:1.25rem;padding:clamp(1.25rem,4vw,3rem)}
+.study-cover p,.study-cover small,.lab-heading small {color:#c6e6d8}
+.company-page .study-cover h1,.lab-heading h1 {max-width:22ch;letter-spacing:-.045em;line-height:1.12}
+.lab-heading,.source-bar,.thesis-review {width:min(calc(100% - 2rem),64rem);margin:1rem auto}
+.lab-heading h1 {font-size:clamp(1.8rem,4vw,3rem);margin:.45rem 0}
+.thesis-review,.source-bar,.market-reading {background:#fff;border:1px solid #cbdad5;border-radius:1rem}
+.company-page .thesis-review {width:100%}
+.market-reading {padding:clamp(1.1rem,3vw,2rem);margin:1.4rem 0;color:#183d38}
+.market-reading small {color:#45645c;font-weight:650}
+.market-reading h2 {margin:.45rem 0;font-size:clamp(1.35rem,3vw,1.85rem);letter-spacing:-.025em}
+.market-reading p {line-height:1.55}
+.market-reading button,.thesis-review form button {background:#165647;color:white;padding:.7rem 1rem;border:0;border-radius:.55rem;font:inherit;font-weight:650}
+.market-reading a {display:inline-block;margin-top:.75rem;color:#165647}
+.market-number {display:block;margin-top:1rem;font-size:2rem;font-variant-numeric:tabular-nums}
+.thesis-review select,.thesis-review textarea {padding:.7rem;border:1px solid #a7bdb5;border-radius:.55rem;background:white;color:#183d38;font:inherit}
+.app .sidebar {background:#f5faf7}
+.app .asset-hero h2,.app .hero-quote strong {color:#fff}
+@media(max-width:560px){.research-nav nav a{padding:.5rem}.research-nav{gap:.5rem}.market-reading button{width:100%}}

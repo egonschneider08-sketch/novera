@@ -2,7 +2,7 @@
 
 The React static build and the reviewed synthetic FastAPI routes are served
 from the same process. No login, market feeds, secrets, production deployment
-or financial provider connectivity is provided by this entry point.
+is provided. Explicit market reads use public brapi and BCB endpoints.
 """
 
 from pathlib import Path
@@ -12,6 +12,7 @@ from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 
 from novera.demo_api import create_app
+from novera.market_api import market_lifespan, router
 
 CSP = (
     "default-src 'self'; "
@@ -44,7 +45,8 @@ def create_local_app(*, frontend_directory: Path | None = None) -> FastAPI:
     if directory.is_symlink() or (directory / "index.html").is_symlink():
         raise RuntimeError("Novera Lab does not serve linked frontend directories")
 
-    app = create_app()
+    app = create_app(lifespan=market_lifespan)
+    app.include_router(router)
 
     @app.middleware("http")
     async def browser_policy(request, call_next):
@@ -67,7 +69,7 @@ def main() -> None:
         app,
         host="127.0.0.1",
         port=8765,
-        log_level="warning",
+        log_level="info",
         access_log=False,
     )
 

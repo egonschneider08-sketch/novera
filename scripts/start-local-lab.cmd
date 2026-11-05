@@ -42,7 +42,7 @@ popd
 
 echo.
 echo [Novera] Laboratorio local: http://127.0.0.1:8765/
-echo [Novera] Ctrl+C interrompe o servidor. Sem provedores reais.
+echo [Novera] Ctrl+C interrompe o servidor. Consultas externas pelos botoes de mercado.
 echo.
 call uv run --offline --locked python -m novera.local_lab
 exit /b %ERRORLEVEL%
