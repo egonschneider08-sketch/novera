@@ -9,7 +9,7 @@ it("uses quarterly consolidated figures and keeps WEG decisions separate from Au
     at: "2025-01-01T00:00:00Z", decision: "Manter", reason: "Hipótese da Aurora",
   }));
   render(<WegStudy />);
-  fireEvent.click(screen.getByText("Abrir ficha de revisão da WEG"));
+  expect(screen.getByRole("table")).toBeTruthy();
   for (const value of ["9.274.426", "1.931.290", "10.207.227", "2.021.942", "20,82%", "19,81%"]) {
     expect(screen.getByText(value)).toBeTruthy();
   }

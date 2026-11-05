@@ -203,3 +203,7 @@ a justificativa após atualizar a página. Registre o tempo e onde ele precisou 
 
 Na página inicial do Lab, **Estudo documental · WEG 2T25** abre a ficha retrospectiva
 com a DRE pública consolidada, fonte primária e histórico próprio deste estudo.
+
+A entrada **Estudos de ações** oferece dois caminhos. **Analisar resultados da WEG**
+abre a comparação trimestral e sua fonte. **Abrir laboratório fictício** leva aos
+cenários Aurora e aos modos de consulta local. O link direto da WEG continua válido.

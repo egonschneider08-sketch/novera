@@ -36,9 +36,10 @@ type ReviewSheetProps = {
   title: string;
   localNotice: string;
   children: ReactNode;
+  initiallyOpen?: boolean;
 };
 
-export function ReviewSheet({ prefix, title, localNotice, children }: ReviewSheetProps) {
+export function ReviewSheet({ prefix, title, localNotice, children, initiallyOpen = false }: ReviewSheetProps) {
   const [decision, setDecision] = useState("");
   const [reason, setReason] = useState("");
   const [records, setRecords] = useState<Review[]>([]);
@@ -53,7 +54,7 @@ export function ReviewSheet({ prefix, title, localNotice, children }: ReviewShee
     }
     catch { setMessage("Não foi possível ler todo o histórico deste navegador."); }
   }
-  return <details className="thesis-review" onToggle={e => { if (e.currentTarget.open) refresh(); }}>
+  return <details open={initiallyOpen} className="thesis-review" onToggle={e => { if (e.currentTarget.open) refresh(); }}>
     <summary>{title}</summary>
     {children}
     <form onSubmit={e => {
